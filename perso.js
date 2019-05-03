@@ -30,6 +30,26 @@ class Perso {
     // }
 
   }
+
+  // Attaque une cible
+  attack(target) {
+    
+    if (this.health > 0) {
+        //Dégats ocasionnés
+        const damages = this.weapon.damage;
+        target.health -= damages;
+
+        //En cas de mort
+        if (target.health <= 0) {
+            
+            target.health = 0;
+            console.log("Game over");
+        }
+
+
+    }
+        
+  }
  
 } 
 
