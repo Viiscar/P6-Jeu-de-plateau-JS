@@ -3,7 +3,7 @@ if (perso1.position || perso1.position -1 || perso1.position +1 || perso1.positi
 
     console.log("Fight ! Tappez D pour vous défendre ou A pour attaquer"); // mettre un son et a insérer dans le dom
 
-    //Récupération du choix utilisateur
+    // Le joueur peut choisir d’attaquer ou de se défendre contre le prochain coup
     $(document).keydown(function(e){
         if (e.which == 65) {//Attaquer
             attack(this.perso); 
@@ -15,16 +15,9 @@ if (perso1.position || perso1.position -1 || perso1.position +1 || perso1.positi
             console.log("Tappez D pour vous défendre ou A pour attaquer");
         }
 
-      });
-    
-
-    //Chacun son tour
-    
-    attack(perso1);
+    });
 
 
 }
 
-
-// Le joueur peut choisir d’attaquer ou de se défendre contre le prochain coup
-//Lorsque le joueur se défend, il encaisse 50% de dégâts en moins qu’en temps normal
+//Chacun son tour
