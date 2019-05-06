@@ -49,9 +49,16 @@ class Grille {
         console.log("player position " + this.personnages[i].position);
       }
 
-    
+    }
 
-  
+    insertWeapon () {
+
+      for (i = 0; i < this.weapons.length; i++ ) {
+
+        $("#" + this.weapons[i].position).css("background-image", this.weapons[i].visual).css("background-repeat", "no-repeat").css("background-position", "center center");
+        console.log("weapon position "+ [i] + " " + this.weapons[i].position);
+      }
+
     }
 
   }

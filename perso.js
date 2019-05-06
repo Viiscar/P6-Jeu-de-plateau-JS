@@ -18,7 +18,7 @@ class Perso {
   checkPosition (perso2) {
 
     // Pour que les personnages n'apparaissent pas à coté
-    if (perso2.position === this.position || this.position -1 || this.position +1 || this.position -10 || this.position +10 || this.position +9 || this.position -9 || this.position +11 || this.position -11) {
+    if (perso2.position === this.position || perso2.position === this.position -1 || perso2.position === this.position +1 || perso2.position === this.position -10 || perso2.position ===this.position +10 || perso2.position === this.position +9 || perso2.position === this.position -9 || perso2.position === this.position +11 || perso2.position === this.position -11) {
       perso2.position = Math.floor(Math.random() * 99);
       // playerPosition(perso2);
       console.log("Check " + perso2.position)

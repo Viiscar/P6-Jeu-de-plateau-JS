@@ -23,21 +23,17 @@ $(function() {
 
 
     //check
-    // perso1.checkPosition (perso2)    faire un switch case
+    perso1.checkPosition (perso2)
 
     //Insertion des personnages
     grille.insertPlayer();
  
 
     //Insertion des armes    
-    weaponPosition(weapon0);
-    weaponPosition(weapon1);
-    weaponPosition(weapon2);
-    weaponPosition(weapon3);
-    weaponPosition(weapon4);
+    grille.insertWeapon();
 
     //Déplacement des personnages
-    playerMove (perso1);
+    playerMove (perso1); // grille.playerMove
 
   });
 
@@ -57,7 +53,7 @@ function greyCells (nombredeCases, color) {
 
 
 
-
+//Mettre dans grille en tant que méthode
 function playerMove (player) {
 
   // Joueur peut se déplacer de 3 cases par tour
@@ -67,11 +63,11 @@ function playerMove (player) {
   }
 
   //Arme récoltée par le joueur
-  if (player.position === weapon0.position || weapon1.position || weapon2.position || weapon3.position || weapon4.position) {
-    player.weapon = this.weapon;
-    // player.weapon.position = player.position; weapon undifined
+  // if (player.position === weapon0.position || player.position === weapon1.position || player.position === weapon2.position || player.position === weapon3.position || player.position === weapon4.position) {
+  //   player.weapon = this.weapon;
+  //   // player.weapon.position = player.position; weapon undifined
 
-  }
+  // }
 
   //Déplacement du personage en fonction de la touche appuyée
   $(document).keydown(function(e){
