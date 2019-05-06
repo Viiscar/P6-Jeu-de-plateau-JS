@@ -1,7 +1,7 @@
 //Création des personnages
 
 class Perso {
-  constructor(name, visual) {
+  constructor(name, visual, weapon) {
 
     this.position = Math.floor(Math.random() * 99);
     if (this.position < 10) {
@@ -10,7 +10,8 @@ class Perso {
     this.name = name;
     this.health = 150;
     this.weapon = this.weapon0;
-    this.visual = visual;  
+    this.visual = visual;
+    this.weapon = weapon;  
 
   }
 
@@ -57,12 +58,7 @@ class Perso {
     
   }
  
-} 
-
-let perso1 = new Perso("Joueur 1", 'url("perso4.png")');
-perso1.position = "32";
-let perso2 = new Perso("Joueur 2", 'url("perso2.png")');
-perso2.position = "33";
+}
 
 //Création d'armes
 class Weapon {
@@ -74,11 +70,6 @@ class Weapon {
   }
 }
 
-let weapon0 = new Weapon("Sticky",'url("weapon0.png")', 10);
-let weapon1 = new Weapon("Stalker",'url("weapon1.png")', 12);
-let weapon2 = new Weapon("Tracker",'url("weapon2.png")', 14);
-let weapon3 = new Weapon("Hunter",'url("weapon3.png")', 16);
-let weapon4 = new Weapon("Exterminator",'url("weapon4.png")', 20);
 
 
 

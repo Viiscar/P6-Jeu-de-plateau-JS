@@ -1,21 +1,33 @@
 $(function() {
     // Insérer le code jQuery ici
-    
 
+    //Création d'armes
+    let weapon0 = new Weapon("Sticky",'url("weapon0.png")', 10);
+    let weapon1 = new Weapon("Stalker",'url("weapon1.png")', 12);
+    let weapon2 = new Weapon("Tracker",'url("weapon2.png")', 14);
+    let weapon3 = new Weapon("Hunter",'url("weapon3.png")', 16);
+    let weapon4 = new Weapon("Exterminator",'url("weapon4.png")', 20);
+    
+    //Création de personages
+    let perso1 = new Perso("Joueur 1", 'url("perso4.png")', weapon0);
+    let perso2 = new Perso("Joueur 2", 'url("perso2.png")', weapon0);
 
     //Création de la grille du plateau
+    let grille = new Grille(10,10, [perso1, perso2], [weapon1, weapon2, weapon3, weapon4]);
     grille.createGrille();
     // createGrille(10,10);
 
     //Insertion des cases grises
     greyCells(20, 'url("grey.png")');
 
+
+
     //check
-    perso1.checkPosition (perso2)
+    // perso1.checkPosition (perso2)    faire un switch case
 
     //Insertion des personnages
-    playerPosition(perso1);
-    playerPosition(perso2);
+    grille.insertPlayer();
+ 
 
     //Insertion des armes    
     weaponPosition(weapon0);
@@ -43,15 +55,7 @@ function greyCells (nombredeCases, color) {
 
 };
 
-// placement de joueur aleatoire
 
-function playerPosition (player) {
-
-  $("#" + player.position).css("background-image", player.visual, weapon0.visual).css("background-repeat", "no-repeat").css("background-position", "center center");
-  console.log("player position " + player.position);
-
-  
-}
 
 
 function playerMove (player) {
