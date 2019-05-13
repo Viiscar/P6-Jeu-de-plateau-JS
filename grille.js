@@ -7,7 +7,37 @@ class Grille {
       //Tableau contenant les perso
       this.personnages = personnages;
       this.weapons = weapons;
+      this.nombredeCases = 10;
+      this.color = 'url("grey.png")';
     }
+
+    //   case vide ou grise
+    greyCells () {
+      let previousCells = [];
+      for (let i=0; i < this.nombredeCases; i++) {
+        
+        let cell = Math.floor(Math.random() * 99);
+        
+        for (let j = 0; j < previousCells.length; j++) {
+          while (previousCells[j] == cell) {
+            cell = Math.floor(Math.random()* 99);
+          }
+        }
+
+       
+        console.log(cell, previousCells);
+        previousCells[i] = cell;
+        if (cell < 10) {
+          cell = "0" + cell;
+        };
+        
+
+        $("#" + cell).css("background-image", this.color);
+        $("#" + cell).addClass("wall");
+      }
+
+    };
+
     generateGrille(){
         let ligne = new Array(this.hauteur);
         for (let i = 0; i < this.hauteur; i++) {
@@ -42,18 +72,27 @@ class Grille {
     // placement de joueur aleatoire
 
     insertPlayer () {
-
-      for (i = 0; i < this.personnages.length; i++ ) {
-
-        $("#" + this.personnages[i].position).css("background-image", this.personnages[i].visual).css("background-repeat", "no-repeat").css("background-position", "center center");
-        console.log("player position " + this.personnages[i].position);
+      let wall = $(".wall");
+      console.log(wall);
+      for (let i = 0; i < this.personnages.length; i++ ) {
+        //Pour insérer le bon personnage
+        let persoSelect;
+        if (i = 0) {
+          persoSelect = "perso1";
+        } else if (i = 1) {
+          persoSelect = "perso2";
+        }
+        console.log(i + persoSelect);
+          $("#" + this.personnages[i].position).addClass(persoSelect);
+          console.log("player position " + this.personnages[i].position);
+        
       }
 
     }
 
     insertWeapon () {
 
-      for (i = 0; i < this.weapons.length; i++ ) {
+      for (let i = 0; i < this.weapons.length; i++ ) {
 
         $("#" + this.weapons[i].position).css("background-image", this.weapons[i].visual).css("background-repeat", "no-repeat").css("background-position", "center center");
         console.log("weapon position "+ [i] + " " + this.weapons[i].position);

@@ -18,7 +18,7 @@ $(function() {
     // createGrille(10,10);
 
     //Insertion des cases grises
-    greyCells(20, 'url("grey.png")');
+    grille.greyCells();
 
 
 
@@ -33,34 +33,52 @@ $(function() {
     grille.insertWeapon();
 
     //Déplacement des personnages
-    playerMove (perso1); // grille.playerMove
+    // playerMove (perso1); // grille.playerMove
+
+    $(document).keydown(function(e){
+      if (e.which == 39) {//Droite
+        $("#" + perso1.position).removeClass("perso1");
+        perso1.position = perso1.position + 1;
+        $("#" + perso1.position).addClass("perso1"); 
+        
+      }
+      if (e.which == 37) {//Gauche
+        $("#" + perso1.position).removeClass("perso1");
+        perso1.position = perso1.position - 1;
+        $("#" + perso1.position).addClass("perso1");
+       
+      }
+      if (e.which == 38) {//Haut
+        $("#" + perso1.position).removeClass("perso1");
+        perso1.position = perso1.position - 10;
+        $("#" + perso1.position).addClass("perso1");
+       
+      }
+      if (e.which == 40) {//Bas
+        $("#" + perso1.position).removeClass("perso1");
+        perso1.position = perso1.position + 10;
+        $("#" + perso1.position).addClass("perso1");
+        
+      }
+    });
 
   });
 
 
 
 
-//   case vide ou grise
-function greyCells (nombredeCases, color) {
 
-  for (i=0; i < nombredeCases; i++) {
-    let cell = Math.floor(Math.random() * 99);
-    $("#" + cell).css("background-image", color);
-
-  }
-
-};
 
 
 
 //Mettre dans grille en tant que méthode
-function playerMove (player) {
+// function playerMove (player) {
 
-  // Joueur peut se déplacer de 3 cases par tour
-  if (player.position > player.position + 3) {
-    player.position = player.position;
+//   // Joueur peut se déplacer de 3 cases par tour
+//   if (player.position > player.position + 3) {
+//     player.position = player.position;
 
-  }
+//   }
 
   //Arme récoltée par le joueur
   // if (player.position === weapon0.position || player.position === weapon1.position || player.position === weapon2.position || player.position === weapon3.position || player.position === weapon4.position) {
@@ -70,26 +88,9 @@ function playerMove (player) {
   // }
 
   //Déplacement du personage en fonction de la touche appuyée
-  $(document).keydown(function(e){
-    if (e.which == 39) {//Droite
-      player.position = player.position + 1;
-      
-    }
-    if (e.which == 37) {//Gauche
-      player.position = player.position - 1;
-     
-    }
-    if (e.which == 38) {//Haut
-      player.position = player.position - 10;
-     
-    }
-    if (e.which == 40) {//Bas
-      player.position = player.position + 10;
-      
-    }
-  });
+  
 
-}
+// }
 
 
 
