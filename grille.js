@@ -88,6 +88,11 @@ class Grille {
         
       }
 
+      // if (this.personnages.hasClass("wall")) {
+      //   this.position = Math.floor(Math.random() * 99);
+      // }
+  
+
     }
 
     insertWeapon () {

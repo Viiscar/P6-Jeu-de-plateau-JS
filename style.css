@@ -5,7 +5,7 @@
 table {
     width: 100%;
     height: 100vh;
-    background-image: url('grass2.png');
+    background-image: url('grass.png');
 }
 
 tr {
@@ -25,23 +25,16 @@ tr {
 
 }
 
-
-.test {
-    background-image: url("weapon3.png"), url("perso1.png");
-    background-position: right center, left center;
-    background-repeat: no-repeat;
-}
-
 .perso1 {
 
-    background-image: url("perso2.png");
-    background-position: center center;
+    background-image: url("weapon0min.png"), url("perso1.png");
+    background-position: left center, center center;
     background-repeat: no-repeat;
 }
 
 .perso2 {
 
-    background-image: url("perso4.png");
-    background-position: center center;
+    background-image: url("weapon0min.png"), url("perso2.png");
+    background-position: left center, center center;
     background-repeat: no-repeat;
 }

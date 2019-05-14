@@ -24,6 +24,7 @@ class Perso {
       console.log("Check " + perso2.position)
     }
 
+
     // Pour que les personnages n'apparaissent pas sur les cases grises
 
     // if (cell === player.position) {

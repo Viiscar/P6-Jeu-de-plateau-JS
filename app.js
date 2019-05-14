@@ -49,8 +49,14 @@ $(function() {
        
       }
       if (e.which == 38) {//Haut
+
+
+
         $("#" + perso1.position).removeClass("perso1");
         perso1.position = perso1.position - 10;
+        if (perso1.position < 10) {                         //fonctionne seulement la premiere fois. Une fois string, impossible de le déplacer.
+          perso1.position = "0" + perso1.position;          //parseINT ?
+        };
         $("#" + perso1.position).addClass("perso1");
        
       }
@@ -121,7 +127,7 @@ function createGrille(hauteur,largeur) {
 }
 
 //Liste de choses à améliorer
-// 1) Les personnages ne doivent pas apparaitre cote a cote
+// 1) Les personnages ne doivent pas apparaitre cote a cote == > Done
 // 2) Les personnages ne peuvent pas apparaitre sur des cases grises
 // 3) La premiere arme doit apparaitre sur les joueurs
 // 4) Arme récoltée par le joueur
