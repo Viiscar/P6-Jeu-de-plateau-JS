@@ -16,11 +16,9 @@ $(function() {
     let grille = new Grille(10,10, [perso1, perso2], [weapon1, weapon2, weapon3, weapon4]);
     grille.createGrille();
     // createGrille(10,10);
-
+    console.log(grille.personnages);
     //Insertion des cases grises
     grille.greyCells();
-
-
 
     //check
     perso1.checkPosition (perso2)
@@ -33,40 +31,63 @@ $(function() {
     grille.insertWeapon();
 
     //Déplacement des personnages
-    // playerMove (perso1); // grille.playerMove
-
     $(document).keydown(function(e){
       if (e.which == 39) {//Droite
-        $("#" + perso1.position).removeClass("perso1");
-        perso1.position = perso1.position + 1;
-        $("#" + perso1.position).addClass("perso1"); 
+        $("#" + perso1.pos).removeClass("perso1");
+        perso1.position = parseInt(perso1.pos) + 1;
+        $("#" + perso1.pos).addClass("perso1"); 
         
       }
       if (e.which == 37) {//Gauche
-        $("#" + perso1.position).removeClass("perso1");
-        perso1.position = perso1.position - 1;
-        $("#" + perso1.position).addClass("perso1");
+        $("#" + perso1.pos).removeClass("perso1");
+        perso1.position = parseInt(perso1.pos) - 1;
+        $("#" + perso1.pos).addClass("perso1");
        
       }
       if (e.which == 38) {//Haut
 
 
 
-        $("#" + perso1.position).removeClass("perso1");
-        perso1.position = perso1.position - 10;
-        if (perso1.position < 10) {                         //fonctionne seulement la premiere fois. Une fois string, impossible de le déplacer.
-          perso1.position = "0" + perso1.position;          //parseINT ?
-        };
-        $("#" + perso1.position).addClass("perso1");
+        $("#" + perso1.pos).removeClass("perso1");
+        perso1.position = parseInt(perso1.pos) - 10;
+        $("#" + perso1.pos).addClass("perso1");
        
       }
       if (e.which == 40) {//Bas
-        $("#" + perso1.position).removeClass("perso1");
-        perso1.position = perso1.position + 10;
-        $("#" + perso1.position).addClass("perso1");
+        $("#" + perso1.pos).removeClass("perso1");
+        perso1.position = parseInt(perso1.pos) + 10;
+        $("#" + perso1.pos).addClass("perso1");
         
       }
+      console.log("perso" + perso1.pos);
+      // grille.weapons.forEach(function(weapon){
+
+      //   if (grille.personnages[i].position == weapon.position) {
+      //     $("#" + grille.personnages[i].position).removeClass();
+      //     $("#" + grille.weapons.position).removeClass();
+      //     let previousWeapon = grille.personnages[i].weapon.visual; // Perso no defined
+      //     $(".perso"+ (i+1)).css("background-image", weapon.visual, url("perso" + (i+1) + ".png"));
+      //     $("#" + weapon.position).css("background-image",previousWeapon);
+      //   } 
+
+      // });
     });
+    // Tour des personnages l'un après l'autre
+// for (let i = 0; i < grille.personnages.length; i++) { //personnges not defined
+//   // 3 tours par personnage
+//   for (let j = 0; j < 3; j++) {
+
+     
+//           //Si le personnage apparait sur une arme il la récupère
+
+          
+//           if (e.which == 13) {//Entrée
+//             j = 3;
+            
+//           }
+//         });
+//   }
+// }
 
   });
 
@@ -77,26 +98,16 @@ $(function() {
 
 
 
-//Mettre dans grille en tant que méthode
-// function playerMove (player) {
+// //Mettre dans grille en tant que méthode
+// // function playerMove (player) {
 
-//   // Joueur peut se déplacer de 3 cases par tour
-//   if (player.position > player.position + 3) {
-//     player.position = player.position;
-
-//   }
-
-  //Arme récoltée par le joueur
-  // if (player.position === weapon0.position || player.position === weapon1.position || player.position === weapon2.position || player.position === weapon3.position || player.position === weapon4.position) {
-  //   player.weapon = this.weapon;
-  //   // player.weapon.position = player.position; weapon undifined
-
-  // }
-
-  //Déplacement du personage en fonction de la touche appuyée
+//         //Si perso arrive sur mur retour a la case départ
+//         if ($(".perso").hasClass("wall")){
+//           this.personnages.position = previousPosition;
+//         }
   
 
-// }
+// // }
 
 
 
@@ -129,7 +140,7 @@ function createGrille(hauteur,largeur) {
 //Liste de choses à améliorer
 // 1) Les personnages ne doivent pas apparaitre cote a cote == > Done
 // 2) Les personnages ne peuvent pas apparaitre sur des cases grises
-// 3) La premiere arme doit apparaitre sur les joueurs
+// 3) La premiere arme doit apparaitre sur les joueurs == > Done
 // 4) Arme récoltée par le joueur
 // 5) Joueur peut se déplacer de 3 cases par tour
 

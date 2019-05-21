@@ -11,10 +11,17 @@ class Perso {
     this.health = 150;
     this.weapon = this.weapon0;
     this.visual = visual;
-    this.weapon = weapon;  
+    this.weapon = weapon;
+    this.nbtour = 3; 
 
   }
-
+  get pos () {
+    if (this.position < 10) {
+      return "0" + this.position;
+    }else {
+      return this.position;
+    }
+  }
   checkPosition (perso2) {
 
     // Pour que les personnages n'apparaissent pas à coté

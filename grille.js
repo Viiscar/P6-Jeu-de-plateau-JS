@@ -8,7 +8,7 @@ class Grille {
       this.personnages = personnages;
       this.weapons = weapons;
       this.nombredeCases = 10;
-      this.color = 'url("grey.png")';
+      this.wall = 'url("grey.png")';
     }
 
     //   case vide ou grise
@@ -32,7 +32,7 @@ class Grille {
         };
         
 
-        $("#" + cell).css("background-image", this.color);
+        $("#" + cell).css("background-image", this.wall);
         $("#" + cell).addClass("wall");
       }
 
@@ -75,32 +75,57 @@ class Grille {
       let wall = $(".wall");
       console.log(wall);
       for (let i = 0; i < this.personnages.length; i++ ) {
-        //Pour insérer le bon personnage
-        let persoSelect;
-        if (i = 0) {
-          persoSelect = "perso1";
-        } else if (i = 1) {
-          persoSelect = "perso2";
+        console.log("a" + i);
+        //Si le personnage apparait sur un mur
+        if ($(".perso").hasClass("wall")){
+          this.personnages.position = Math.floor(Math.random() * 99);
         }
-        console.log(i + persoSelect);
-          $("#" + this.personnages[i].position).addClass(persoSelect);
-          console.log("player position " + this.personnages[i].position);
+        //Si le personnage apparait sur une arme
+        if ($(".perso").hasClass("weapon")){
+          this.personnages.position = Math.floor(Math.random() * 99);
+        }
+        
+        $("#" + this.personnages[i].position).addClass("perso"+(i+1));
+        console.log("player position " + this.personnages[i].position);
         
       }
 
-      // if (this.personnages.hasClass("wall")) {
-      //   this.position = Math.floor(Math.random() * 99);
-      // }
-  
+
 
     }
 
     insertWeapon () {
 
+      let previousCells = [];
+
       for (let i = 0; i < this.weapons.length; i++ ) {
 
-        $("#" + this.weapons[i].position).css("background-image", this.weapons[i].visual).css("background-repeat", "no-repeat").css("background-position", "center center");
+        let cell = this.weapons[i].position;
+
+        console.log("p "+previousCells);
+
+        for (let j = 0; j < previousCells.length; j++) {
+          console.log(previousCells);
+          while (previousCells[j] == cell) {
+            this.weapons[i].position = Math.floor(Math.random() * 99);
+            cell = this.weapons[i].position;
+          }
+        }
+
+        previousCells[i] = cell;
+        if (cell < 10) {
+          cell = "0" + cell;
+        }
+
+        //Si une arme apparait sur un mur
+        if ($(".weapon").hasClass("wall")){ //creer classe weapon
+          this.weapons.position = Math.floor(Math.random() * 99);
+        }
+
+
+        $("#" + cell).css("background-image", this.weapons[i].visual).css("background-repeat", "no-repeat").css("background-position", "center center");
         console.log("weapon position "+ [i] + " " + this.weapons[i].position);
+        $("#" + cell).addClass("weapon");
       }
 
     }
@@ -109,4 +134,4 @@ class Grille {
 
   
 
-  // var randomgrey = Math.floor(Math.random() * table1.length);
+ //persoSelect ne fonctionne pas parfaitement
