@@ -24,8 +24,6 @@ class Grille {
           }
         }
 
-       
-        console.log(cell, previousCells);
         previousCells[i] = cell;
         if (cell < 10) {
           cell = "0" + cell;
@@ -73,9 +71,9 @@ class Grille {
 
     insertPlayer () {
       let wall = $(".wall");
-      console.log(wall);
+      
       for (let i = 0; i < this.personnages.length; i++ ) {
-        console.log("a" + i);
+        
         //Si le personnage apparait sur un mur
         if ($(".perso").hasClass("wall")){
           this.personnages.position = Math.floor(Math.random() * 99);
@@ -86,7 +84,7 @@ class Grille {
         }
         
         $("#" + this.personnages[i].position).addClass("perso"+(i+1));
-        console.log("player position " + this.personnages[i].position);
+        
         
       }
 
@@ -102,10 +100,10 @@ class Grille {
 
         let cell = this.weapons[i].position;
 
-        console.log("p "+previousCells);
+        
 
         for (let j = 0; j < previousCells.length; j++) {
-          console.log(previousCells);
+          
           while (previousCells[j] == cell) {
             this.weapons[i].position = Math.floor(Math.random() * 99);
             cell = this.weapons[i].position;
@@ -124,14 +122,12 @@ class Grille {
 
 
         $("#" + cell).css("background-image", this.weapons[i].visual).css("background-repeat", "no-repeat").css("background-position", "center center");
-        console.log("weapon position "+ [i] + " " + this.weapons[i].position);
-        $("#" + cell).addClass("weapon");
+      
+        //$("#" + cell).addClass("weapon");
       }
 
     }
 
+    
   }
 
-  
-
- //persoSelect ne fonctionne pas parfaitement

@@ -1,5 +1,4 @@
 $(function() {
-    // Insérer le code jQuery ici
 
     //Création d'armes
     let weapon0 = new Weapon("Sticky",'url("weapon0.png")', 10);
@@ -16,7 +15,7 @@ $(function() {
     let grille = new Grille(10,10, [perso1, perso2], [weapon1, weapon2, weapon3, weapon4]);
     grille.createGrille();
     // createGrille(10,10);
-    console.log(grille.personnages);
+    
     //Insertion des cases grises
     grille.greyCells();
 
@@ -59,19 +58,35 @@ $(function() {
         $("#" + perso1.pos).addClass("perso1");
         
       }
-      console.log("perso" + perso1.pos);
-      // grille.weapons.forEach(function(weapon){
+      //Le changement d'arme n'opère pas
+      grille.weapons.forEach(function(weapon){
+        for (i=0; i < grille.personnages.length; i++){
 
-      //   if (grille.personnages[i].position == weapon.position) {
-      //     $("#" + grille.personnages[i].position).removeClass();
-      //     $("#" + grille.weapons.position).removeClass();
-      //     let previousWeapon = grille.personnages[i].weapon.visual; // Perso no defined
-      //     $(".perso"+ (i+1)).css("background-image", weapon.visual, url("perso" + (i+1) + ".png"));
-      //     $("#" + weapon.position).css("background-image",previousWeapon);
-      //   } 
+          if (grille.personnages[i].position == weapon.position) {
+            console.log(grille.personnages[i].weapon);
+            console.log(weapon);
+            grille.personnages[i].weapon = weapon;
+            console.log(weapon);
+            this.weapon = grille.personnages[i].weapon; //noooo
+            console.log(weapon);
+            console.log(grille.personnages[i].weapon);
+            // $("#" + grille.personnages[i].position).removeClass();
+            let test = $("#" + weapon.position).removeAttr("style");
+            console.log(weapon.position);
+            let previousWeapon = grille.personnages[i].weapon.visual;
+            $(".perso"+ (i+1)).css("background-image", weapon.visual + ', url("perso" + (i+1) + ".png")');
 
-      // });
+
+            $("#" + weapon.position).css("background-image",previousWeapon);
+            
+          }
+        }
+
+      });
     });
+
+    
+
     // Tour des personnages l'un après l'autre
 // for (let i = 0; i < grille.personnages.length; i++) { //personnges not defined
 //   // 3 tours par personnage
@@ -82,7 +97,7 @@ $(function() {
 
           
 //           if (e.which == 13) {//Entrée
-//             j = 3;
+//             j = 0;
             
 //           }
 //         });
@@ -92,13 +107,6 @@ $(function() {
   });
 
 
-
-
-
-
-
-
-// //Mettre dans grille en tant que méthode
 // // function playerMove (player) {
 
 //         //Si perso arrive sur mur retour a la case départ
