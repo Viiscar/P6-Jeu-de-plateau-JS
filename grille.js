@@ -69,30 +69,32 @@ class Grille {
 
     // placement de joueur aleatoire
 
-    insertPlayer () {
+    insertPlayers () {
       let wall = $(".wall");
       
       for (let i = 0; i < this.personnages.length; i++ ) {
         
         //Si le personnage apparait sur un mur
         if ($(".perso").hasClass("wall")){
-          this.personnages.position = Math.floor(Math.random() * 99);
+          this.personnages[i].position = Math.floor(Math.random() * 99);
         }
         //Si le personnage apparait sur une arme
         if ($(".perso").hasClass("weapon")){
-          this.personnages.position = Math.floor(Math.random() * 99);
+          this.personnages[i].position = Math.floor(Math.random() * 99);
         }
         
-        $("#" + this.personnages[i].position).addClass("perso"+(i+1));
+        $("#" + this.personnages[i].position).css("background-image", this.personnages[i].visu);
         
         
       }
 
 
 
+
+
     }
 
-    insertWeapon () {
+    insertWeapons () {
 
       let previousCells = [];
 
@@ -121,11 +123,23 @@ class Grille {
         }
 
 
-        $("#" + cell).css("background-image", this.weapons[i].visual).css("background-repeat", "no-repeat").css("background-position", "center center");
+        $("#" + cell).css("background-image", this.weapons[i].visual);
       
         //$("#" + cell).addClass("weapon");
       }
 
+
+    }
+
+    swapWeapon (index, weapon, perso) {
+      $("#" + index).removeClass("perso1");
+      perso.weapon = weapon;
+      $("#" + index).css("background-image", perso.visu);
+    }
+
+    move (index, perso) {
+
+      $("#" + index).css("background-image", perso.visu);
     }
 
     

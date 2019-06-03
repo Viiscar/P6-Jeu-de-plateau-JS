@@ -22,6 +22,11 @@ class Perso {
       return this.position;
     }
   }
+
+
+  get visu () {
+    return this.weapon.visual + "," + this.visual;
+  }
   checkPosition (perso2) {
 
     // Pour que les personnages n'apparaissent pas à coté

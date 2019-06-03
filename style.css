@@ -18,6 +18,8 @@ td {
     height: 5.3em; */
     border-left: 1px solid black;
     border-right: 1px solid black;
+    background-position: left center, center center;
+    background-repeat: no-repeat;
 }
 
 tr {
@@ -28,13 +30,10 @@ tr {
 .perso1 {
 
     background-image: url("weapon0min.png"), url("perso1.png");
-    background-position: left center, center center;
-    background-repeat: no-repeat;
 }
 
 .perso2 {
 
     background-image: url("weapon0min.png"), url("perso2.png");
-    background-position: left center, center center;
-    background-repeat: no-repeat;
+
 }

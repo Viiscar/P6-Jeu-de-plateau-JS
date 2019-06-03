@@ -24,7 +24,7 @@ if (perso1.position === perso2.position|| perso1.position -1 === perso2.position
 
   //Squelette tour perso
   //Selection du personage
-  for (i=0; i < grille.personnages.length+1; i++) {
+  while (grille.personnages[i].health > 0) {
       //Si le personnage est en vie
       if (grille.personnages[i].health > 0) {
 
