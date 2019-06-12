@@ -9,6 +9,8 @@ class Grille {
       this.weapons = weapons;
       this.nombredeCases = 10;
       this.wall = 'url("grey.png")';
+
+      console.log(this.weapons);
     }
 
     //   case vide ou grise
@@ -133,13 +135,62 @@ class Grille {
 
     swapWeapon (index, weapon, perso) {
       $("#" + index).removeClass("perso1");
+      let previousWeapon = perso.weapon;
+      console.log(perso.weapon.position);
       perso.weapon = weapon;
+
+     
       $("#" + index).css("background-image", perso.visu);
+      
+
+      // On supprime l'arme de la case du tableau et on y ajoute celle du personnage
+      let weaponPos = this.weapons.indexOf(weapon);
+      this.weapons.splice(weaponPos, 1);
+      this.weapons.push(previousWeapon);
+
+      console.log(this.weapons);
+
+    
+    }
+
+    displayWeapons () {
+      
+      this.weapons.forEach(function(weapon){
+        
+        // if (document.getElementById(weapon.position).hasAttribute("style")){
+          
+          let weaponAttr = $("#" + weapon.position).attr("style");
+
+          // For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
+          if (typeof weaponAttr !== typeof undefined && weaponAttr !== false) {
+            
+          }else {
+             $("#" + weapon.position).css("background-image", weapon.visual);
+             console.log(weapon.position);
+           }
+        
+      });
+
     }
 
     move (index, perso) {
 
-      $("#" + index).css("background-image", perso.visu);
+      perso.nbtour -= 1;
+      console.log ("nbt" + perso.nbtour);
+      
+      // Si le personnage apparait sur un mur
+      if ($("#" + index).hasClass("wall")){
+        
+      } else {
+        perso.position = index;
+        
+      }
+
+      $("#" + perso.position).css("background-image", perso.visu);
+      
+      
+
+      
     }
 
     

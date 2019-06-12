@@ -33,36 +33,42 @@ $(function() {
 
     //Déplacement des personnages
     $(document).keydown(function(e){
+
+      grille.displayWeapons();
+
+      // let previousPoistion = perso1.lastPos;
+      // console.log(previousPoistion); // undifined
+
       if (e.which == 39) {//Droite
         $("#" + perso1.pos).removeAttr("style");
-        perso1.position = parseInt(perso1.pos) + 1;
+        let newPosition = parseInt(perso1.pos) + 1;
         // $("#" + perso1.pos).addClass("perso1"); 
-        grille.move(perso1.pos, perso1);
+        grille.move(newPosition, perso1);
         //modifier attribut style
       }
       if (e.which == 37) {//Gauche
         $("#" + perso1.pos).removeAttr("style");
-        perso1.position = parseInt(perso1.pos) - 1;
+        let newPosition = parseInt(perso1.pos) - 1;
         // $("#" + perso1.pos).addClass("perso1");
-        grille.move(perso1.pos, perso1);
+        grille.move(newPosition, perso1);
        
       }
       if (e.which == 38) {//Haut
 
         $("#" + perso1.pos).removeAttr("style");
-        perso1.position = parseInt(perso1.pos) - 10;
+        let newPosition = parseInt(perso1.pos) - 10;
         // $("#" + perso1.pos).addClass("perso1");
-        grille.move(perso1.pos, perso1);
+        grille.move(newPosition, perso1);
        
       }
       if (e.which == 40) {//Bas
         $("#" + perso1.pos).removeAttr("style");
-        perso1.position = parseInt(perso1.pos) + 10;
+        let newPosition = parseInt(perso1.pos) + 10;
         // $("#" + perso1.pos).addClass("perso1");
-        grille.move(perso1.pos, perso1);
+        grille.move(newPosition, perso1);
         
       }
-      //Le changement d'arme n'opère pas
+      
       grille.weapons.forEach(function(weapon){
         for (i=0; i < grille.personnages.length; i++){
 

@@ -23,10 +23,14 @@ class Perso {
     }
   }
 
+  // get lastpos () {
+  //   return this.position;
+  // }
 
   get visu () {
     return this.weapon.visual + "," + this.visual;
   }
+  
   checkPosition (perso2) {
 
     // Pour que les personnages n'apparaissent pas à coté
@@ -80,6 +84,7 @@ class Weapon {
     this.name = name;
     this.visual = visual;
     this.damage = damage;
+    //this.swap = [false, index] 
   }
 }
 
