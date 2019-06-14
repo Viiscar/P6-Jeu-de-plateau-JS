@@ -68,7 +68,7 @@ class Grille {
       $("#plateau").append(table);
 
     }
-
+    
     // placement de joueur aleatoire
 
     insertPlayers () {
@@ -118,16 +118,17 @@ class Grille {
         if (cell < 10) {
           cell = "0" + cell;
         }
-
+        $("#" + cell).addClass("weapon");
         //Si une arme apparait sur un mur
-        if ($(".weapon").hasClass("wall")){ //creer classe weapon
+        if ($(".weapon").hasClass("wall")){ //No
+          $("#" + this.weapons.position).removeClass(weapon);
           this.weapons.position = Math.floor(Math.random() * 99);
         }
 
 
         $("#" + cell).css("background-image", this.weapons[i].visual);
       
-        //$("#" + cell).addClass("weapon");
+        
       }
 
 
@@ -150,30 +151,28 @@ class Grille {
 
       console.log(this.weapons);
 
-    
+      $("#actions").prepend("Le joueur à récupéré l'arme " + weapon.name + ".</br>");
+ 
     }
 
     displayWeapons () {
       
       this.weapons.forEach(function(weapon){
-        
-        // if (document.getElementById(weapon.position).hasAttribute("style")){
           
-          let weaponAttr = $("#" + weapon.position).attr("style");
+        let weaponAttr = $("#" + weapon.position).attr("style");
 
-          // For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
-          if (typeof weaponAttr !== typeof undefined && weaponAttr !== false) {
-            
-          }else {
-             $("#" + weapon.position).css("background-image", weapon.visual);
-             console.log(weapon.position);
-           }
+        if (typeof weaponAttr !== typeof undefined && weaponAttr !== false) {
+          // c'est pas weapon position. c'est la place de l'autre arme
+        }else {
+            $("#" + weapon.position).css("background-image", weapon.visual);
+            console.log(weapon.position);
+          }
         
       });
 
     }
 
-    move (index, perso) {
+    move (index, perso, direction) {
 
       perso.nbtour -= 1;
       console.log ("nbt" + perso.nbtour);
@@ -187,6 +186,7 @@ class Grille {
       }
 
       $("#" + perso.position).css("background-image", perso.visu);
+      $("#actions").prepend("Le joueur s'est déplacé " + direction + "</br>");
       
       
 

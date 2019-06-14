@@ -31,26 +31,31 @@ $(function() {
     //Insertion des armes    
     grille.insertWeapons();
 
+    //Insertion des stats de personnages
+    $("#stats").append("J1 :" + "arme : "+ perso1.weapon.name + " puissance : " + perso1.weapon.damage +"</br>");
+    $("#stats").append("J2 :" + "arme : "+ perso2.weapon.name + " puissance : " + perso2.weapon.damage +"</br>");
+
+
     //Déplacement des personnages
     $(document).keydown(function(e){
-
-      grille.displayWeapons();
-
+      grille.displayWeapons ();
       // let previousPoistion = perso1.lastPos;
       // console.log(previousPoistion); // undifined
 
       if (e.which == 39) {//Droite
         $("#" + perso1.pos).removeAttr("style");
-        let newPosition = parseInt(perso1.pos) + 1;
+        perso1.position = parseInt(perso1.pos) + 1;
         // $("#" + perso1.pos).addClass("perso1"); 
-        grille.move(newPosition, perso1);
+        let direction = "à droite.";
+        grille.move(perso1.pos, perso1, direction);
         //modifier attribut style
       }
       if (e.which == 37) {//Gauche
         $("#" + perso1.pos).removeAttr("style");
         let newPosition = parseInt(perso1.pos) - 1;
         // $("#" + perso1.pos).addClass("perso1");
-        grille.move(newPosition, perso1);
+        let direction = "à gauche.";
+        grille.move(newPosition, perso1, direction);
        
       }
       if (e.which == 38) {//Haut
@@ -58,14 +63,16 @@ $(function() {
         $("#" + perso1.pos).removeAttr("style");
         let newPosition = parseInt(perso1.pos) - 10;
         // $("#" + perso1.pos).addClass("perso1");
-        grille.move(newPosition, perso1);
+        let direction = "en haut.";
+        grille.move(newPosition, perso1, direction);
        
       }
       if (e.which == 40) {//Bas
         $("#" + perso1.pos).removeAttr("style");
-        let newPosition = parseInt(perso1.pos) + 10;
+        perso1.position = parseInt(perso1.pos) + 10;
         // $("#" + perso1.pos).addClass("perso1");
-        grille.move(newPosition, perso1);
+        let direction = "en bas.";
+        grille.move(perso1.pos, perso1, direction);
         
       }
       

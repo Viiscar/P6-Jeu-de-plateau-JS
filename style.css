@@ -2,6 +2,17 @@
     background-color: brown;
 }
 
+#info {
+    background-color: aqua;
+    padding: 0px;
+}
+
+#stats {
+    border: 3px solid black;
+    background-color: azure;
+    padding-left: 15px;
+}
+
 table {
     width: 100%;
     height: 100vh;
