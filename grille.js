@@ -137,7 +137,8 @@ class Grille {
     swapWeapon (index, weapon, perso) {
       $("#" + index).removeClass("perso1");
       let previousWeapon = perso.weapon;
-      console.log(perso.weapon.position);
+      perso.swapweapon = previousWeapon;
+      // console.log(perso.weapon.position);
       perso.weapon = weapon;
 
      
@@ -149,7 +150,7 @@ class Grille {
       this.weapons.splice(weaponPos, 1);
       this.weapons.push(previousWeapon);
 
-      console.log(this.weapons);
+      // console.log(this.weapons);
 
       $("#actions").prepend("Le joueur à récupéré l'arme " + weapon.name + ".</br>");
  
@@ -165,7 +166,7 @@ class Grille {
           // c'est pas weapon position. c'est la place de l'autre arme
         }else {
             $("#" + weapon.position).css("background-image", weapon.visual);
-            console.log(weapon.position);
+            console.log("t" + weapon.position);
           }
         
       });
@@ -175,18 +176,22 @@ class Grille {
     move (index, perso, direction) {
 
       perso.nbtour -= 1;
-      console.log ("nbt" + perso.nbtour);
       
       // Si le personnage apparait sur un mur
       if ($("#" + index).hasClass("wall")){
         
       } else {
         perso.position = index;
-        
+        perso.weapon.position = index;
       }
+      // le personnage se dédouble
+      // if (perso.position < 10) {
+      //   perso.position = "0" + perso.position;
+      // };
 
       $("#" + perso.position).css("background-image", perso.visu);
       $("#actions").prepend("Le joueur s'est déplacé " + direction + "</br>");
+  
       
       
 

@@ -12,10 +12,13 @@ class Perso {
     this.weapon = this.weapon0;
     this.visual = visual;
     this.weapon = weapon;
-    this.nbtour = 3; 
+    this.weapon.position = this.position;
+    this.nbtour = 3;
+    this.swapweapon = 0;
 
   }
   get pos () {
+    //ne fonctionne pas
     if (this.position < 10) {
       return "0" + this.position;
     }else {

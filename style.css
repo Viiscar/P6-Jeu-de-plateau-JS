@@ -1,10 +1,13 @@
 #plateau {
     background-color: brown;
+    
 }
 
 #info {
     background-color: aqua;
     padding: 0px;
+    height:100vh;
+    overflow: hidden;
 }
 
 #stats {

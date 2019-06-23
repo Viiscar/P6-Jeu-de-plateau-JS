@@ -38,16 +38,24 @@ $(function() {
 
     //Déplacement des personnages
     $(document).keydown(function(e){
-      grille.displayWeapons ();
+
+      if (perso1.swapweapon) {
+        console.log("ook");
+        $("#" + perso1.swapweapon.position).css("background-image", perso1.swapweapon.visual);
+        perso1.swapweapon = 0;
+        
+      }
+
+      // grille.displayWeapons ();
       // let previousPoistion = perso1.lastPos;
       // console.log(previousPoistion); // undifined
 
       if (e.which == 39) {//Droite
         $("#" + perso1.pos).removeAttr("style");
-        perso1.position = parseInt(perso1.pos) + 1;
+        let newPosition = parseInt(perso1.pos) + 1;
         // $("#" + perso1.pos).addClass("perso1"); 
         let direction = "à droite.";
-        grille.move(perso1.pos, perso1, direction);
+        grille.move(newPosition, perso1, direction);
         //modifier attribut style
       }
       if (e.which == 37) {//Gauche
@@ -69,10 +77,10 @@ $(function() {
       }
       if (e.which == 40) {//Bas
         $("#" + perso1.pos).removeAttr("style");
-        perso1.position = parseInt(perso1.pos) + 10;
+        let newPosition = parseInt(perso1.pos) + 10;
         // $("#" + perso1.pos).addClass("perso1");
         let direction = "en bas.";
-        grille.move(perso1.pos, perso1, direction);
+        grille.move(newPosition, perso1, direction);
         
       }
       
@@ -81,8 +89,8 @@ $(function() {
 
           if (grille.personnages[i].position == weapon.position) {
             grille.swapWeapon(weapon.position, weapon, grille.personnages[i]);
-            // console.log(grille.personnages[i].weapon);
-            // console.log(weapon);
+            console.log(grille.personnages[i]);
+            console.log(weapon);
             // grille.personnages[i].weapon = weapon;
             // console.log(weapon);
             // this.weapon = grille.personnages[i].weapon; //noooo
@@ -100,7 +108,9 @@ $(function() {
           }
         }
 
+
       });
+      
     });
 
     
