@@ -38,17 +38,17 @@ class Grille {
 
     };
 
-    generateGrille(){
-        let ligne = new Array(this.hauteur);
-        for (let i = 0; i < this.hauteur; i++) {
-            ligne [i] = new Array(this.largeur);
-            for (let j=0; j < this.largeur; j++) {
-                ligne [i][j] = "test";
-            }
+    // generateGrille(){
+    //     let ligne = new Array(this.hauteur);
+    //     for (let i = 0; i < this.hauteur; i++) {
+    //         ligne [i] = new Array(this.largeur);
+    //         for (let j=0; j < this.largeur; j++) {
+    //             ligne [i][j] = "test";
+    //         }
 
-        }
+    //     }
         
-    }
+    // }
 
     createGrille() {
       
@@ -89,9 +89,6 @@ class Grille {
         
         
       }
-
-
-
 
 
     }
@@ -184,6 +181,16 @@ class Grille {
         perso.position = index;
         perso.weapon.position = index;
       }
+
+      //si le personage sort du cadre
+      if ((index) > 99) {
+        perso.position = perso.position - 10;
+      }
+
+      if ((index) < 1) {
+        perso.position = perso.position + 10;
+      }
+
       // le personnage se dédouble
       // if (perso.position < 10) {
       //   perso.position = "0" + perso.position;
