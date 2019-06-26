@@ -10,7 +10,7 @@ class Grille {
       this.nombredeCases = 10;
       this.wall = 'url("grey.png")';
 
-      console.log(this.weapons);
+
     }
 
     //   case vide ou grise
@@ -116,9 +116,10 @@ class Grille {
           cell = "0" + cell;
         }
         $("#" + cell).addClass("weapon");
+        $("#" + cell).attr("data-weapon", i);
         //Si une arme apparait sur un mur
         if ($(".weapon").hasClass("wall")){ //No
-          $("#" + this.weapons.position).removeClass(weapon);
+          $("#" + this.weapons.position).removeClass(weapon); //weapon not defined
           this.weapons.position = Math.floor(Math.random() * 99);
         }
 
@@ -132,9 +133,10 @@ class Grille {
     }
 
     swapWeapon (index, weapon, perso) {
-      $("#" + index).removeClass("perso1");
+      
       let previousWeapon = perso.weapon;
       perso.swapweapon = previousWeapon;
+      console.log(perso.swapweapon);
       // console.log(perso.weapon.position);
       perso.weapon = weapon;
 
@@ -143,9 +145,9 @@ class Grille {
       
 
       // On supprime l'arme de la case du tableau et on y ajoute celle du personnage
-      let weaponPos = this.weapons.indexOf(weapon);
-      this.weapons.splice(weaponPos, 1);
-      this.weapons.push(previousWeapon);
+      // let weaponPos = this.weapons.indexOf(weapon);
+      // this.weapons.splice(weaponPos, 1);
+      // this.weapons.push(previousWeapon);
 
       // console.log(this.weapons);
 
@@ -153,28 +155,35 @@ class Grille {
  
     }
 
-    displayWeapons () {
+    // displayWeapons () {
       
-      this.weapons.forEach(function(weapon){
+    //   this.weapons.forEach(function(weapon){
           
-        let weaponAttr = $("#" + weapon.position).attr("style");
+    //     let weaponAttr = $("#" + weapon.position).attr("style");
 
-        if (typeof weaponAttr !== typeof undefined && weaponAttr !== false) {
-          // c'est pas weapon position. c'est la place de l'autre arme
-        }else {
-            $("#" + weapon.position).css("background-image", weapon.visual);
-            console.log("t" + weapon.position);
-          }
+    //     if (typeof weaponAttr !== typeof undefined && weaponAttr !== false) {
+    //       // c'est pas weapon position. c'est la place de l'autre arme
+    //     }else {
+    //         $("#" + weapon.position).css("background-image", weapon.visual);
+    //         console.log("t" + weapon.position);
+    //       }
         
-      });
+    //   });
 
-    }
+    // }
 
     move (index, perso, direction) {
 
       perso.nbtour -= 1;
       
+      if (perso.swapweapon != 0){
+
+        $("#" + perso.swapweapon.position).css("background-image", perso.swapweapon.visual);
+        perso.swapweapon = 0;
+      }
+      
       // Si le personnage apparait sur un mur
+
       if ($("#" + index).hasClass("wall")){
         
       } else {
@@ -187,7 +196,7 @@ class Grille {
         perso.position = perso.position - 10;
       }
 
-      if ((index) < 1) {
+      if ((index) < 0) {
         perso.position = perso.position + 10;
       }
 
@@ -196,9 +205,8 @@ class Grille {
       //   perso.position = "0" + perso.position;
       // };
 
-      $("#" + perso.position).css("background-image", perso.visu);
+      $("#" + perso.pos).css("background-image", perso.visu);
       $("#actions").prepend("Le joueur s'est déplacé " + direction + "</br>");
-  
       
       
 

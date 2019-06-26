@@ -4,9 +4,9 @@ class Perso {
   constructor(name, visual, weapon) {
 
     this.position = Math.floor(Math.random() * 99);
-    if (this.position < 10) {
-      this.position = "0" + this.position;
-    };
+    // if (this.position < 10) {
+    //   this.position = "0" + this.position;
+    // };
     this.name = name;
     this.health = 150;
     this.weapon = this.weapon0;
@@ -18,13 +18,15 @@ class Perso {
 
   }
   get pos () {
-    //ne fonctionne pas
+    
     if (this.position < 10) {
       return "0" + this.position;
-    }else {
-      return this.position;
-    }
+
+    }else
+     return this.position;
   }
+
+  // faire un setter position
 
   // get lastpos () {
   //   return this.position;
