@@ -116,7 +116,10 @@ class Grille {
           cell = "0" + cell;
         }
         $("#" + cell).addClass("weapon");
-        $("#" + cell).attr("data-weapon", i);
+        $("#" + cell).data("data-weapon", i);
+        
+        
+        // $("#" + cell).hasData(cell);
         //Si une arme apparait sur un mur
         if ($(".weapon").hasClass("wall")){ //No
           $("#" + this.weapons.position).removeClass(weapon); //weapon not defined
@@ -136,8 +139,8 @@ class Grille {
       
       let previousWeapon = perso.weapon;
       perso.swapweapon = previousWeapon;
-      console.log(perso.swapweapon);
-      // console.log(perso.weapon.position);
+      
+      
       perso.weapon = weapon;
 
      
@@ -152,6 +155,7 @@ class Grille {
       // console.log(this.weapons);
 
       $("#actions").prepend("Le joueur à récupéré l'arme " + weapon.name + ".</br>");
+      console.log(perso.swap);
  
     }
 
@@ -172,10 +176,21 @@ class Grille {
 
     // }
 
-    move (index, perso, direction) {
+    move (index, perso, weapon, direction) {
 
-      perso.nbtour -= 1;
+        let selectedWeapon = $("#" + index).data("data-weapon");
+        this.weapons[selectedWeapon];
+
+      if ($("#" + index).data("data-weapon")){
+        
+        this.swapWeapon(index, this.weapons[selectedWeapon], perso);
+        // weapon devrait etre l'arme de la case
+
+      }
+
+
       
+
       if (perso.swapweapon != 0){
 
         $("#" + perso.swapweapon.position).css("background-image", perso.swapweapon.visual);
@@ -199,11 +214,6 @@ class Grille {
       if ((index) < 0) {
         perso.position = perso.position + 10;
       }
-
-      // le personnage se dédouble
-      // if (perso.position < 10) {
-      //   perso.position = "0" + perso.position;
-      // };
 
       $("#" + perso.pos).css("background-image", perso.visu);
       $("#actions").prepend("Le joueur s'est déplacé " + direction + "</br>");

@@ -26,11 +26,15 @@ class Perso {
      return this.position;
   }
 
-  // faire un setter position
-
-  // get lastpos () {
-  //   return this.position;
+  // set pos () {
+  //   set lang(lang) {
+  //     this.language = lang.toUpperCase();
+  //   }
   // }
+
+  get swap () {
+    return this.swapweapon;
+  }
 
   get visu () {
     return this.weapon.visual + "," + this.visual;
