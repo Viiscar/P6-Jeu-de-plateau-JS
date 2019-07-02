@@ -72,7 +72,6 @@ class Grille {
     // placement de joueur aleatoire
 
     insertPlayers () {
-      let wall = $(".wall");
       
       for (let i = 0; i < this.personnages.length; i++ ) {
         
@@ -84,8 +83,17 @@ class Grille {
         if ($(".perso").hasClass("weapon")){
           this.personnages[i].position = Math.floor(Math.random() * 99);
         }
+
+        if (this.personnages[i].position < 10) {
+          this.personnages[i].position = "0" + this.personnages[i].position;
+        }
         
         $("#" + this.personnages[i].position).css("background-image", this.personnages[i].visu);
+        
+        //Si la position du personnage commence par 0, alor parseInt
+        if (/^0/.test(this.personnages[i].position)) {
+          this.personnages[i].position = parseInt(this.personnages[i].position);
+        }
         
         
       }
@@ -98,10 +106,6 @@ class Grille {
       let previousCells = [];
 
       for (let i = 0; i < this.weapons.length; i++ ) {
-
-        // if (i = 0) {
-        //   console.log("oui !");
-        // };
 
         let cell = this.weapons[i].position;
 
@@ -116,13 +120,18 @@ class Grille {
         }
 
         previousCells[i] = cell;
+        
         if (cell < 10) {
           cell = "0" + cell;
         }
 
 
         $("#" + cell).addClass("weapon");
-        $("#" + cell).data("data-weapon", i); // C'est parce que c'est la weapon indexée 0
+
+        console.log(i);
+        console.log(this.weapons);
+     
+        $("#" + cell).data("data-weapon", i); // C'est parce que c'est la weapon indexée 0 ?
         
         //Si une arme apparait sur un mur
         if ($(".weapon").hasClass("wall")){
@@ -132,6 +141,10 @@ class Grille {
 
 
         $("#" + cell).css("background-image", this.weapons[i].visual);
+
+        if (/^0/.test(this.weapons.position)) {
+          this.weapons.position = parseInt(this.weapons.position);
+        }
       
         
       }
@@ -175,7 +188,7 @@ class Grille {
         console.log(perso.position);
         console.log("swapweapon");
         console.log(perso.swapweapon.position); // même position
-        let emplacement = index; // Il faudrait pouvoir y acceder lorsque le joueur sort de  la case
+        let emplacement = index; // Il faudrait pouvoir y acceder lorsque le joueur sort de  la case ?
         $("#" + perso.swapweapon.position).css("background-image", perso.swapweapon.visual);// swapweapon n'est pas au bon endroit
         perso.swapweapon = 0;
         

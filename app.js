@@ -10,7 +10,7 @@ $(function() {
 
 // hache simple (weapon1) n'est pas échangée
 
-// armes de la première ligne ... Parse number ?
+// armes et murs de la première ligne ... 
 
 // Fight
 
