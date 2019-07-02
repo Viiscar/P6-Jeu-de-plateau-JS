@@ -99,6 +99,10 @@ class Grille {
 
       for (let i = 0; i < this.weapons.length; i++ ) {
 
+        // if (i = 0) {
+        //   console.log("oui !");
+        // };
+
         let cell = this.weapons[i].position;
 
         
@@ -115,14 +119,14 @@ class Grille {
         if (cell < 10) {
           cell = "0" + cell;
         }
+
+
         $("#" + cell).addClass("weapon");
-        $("#" + cell).data("data-weapon", i);
+        $("#" + cell).data("data-weapon", i); // C'est parce que c'est la weapon indexée 0
         
-        
-        // $("#" + cell).hasData(cell);
         //Si une arme apparait sur un mur
-        if ($(".weapon").hasClass("wall")){ //No
-          $("#" + this.weapons.position).removeClass(weapon); //weapon not defined
+        if ($(".weapon").hasClass("wall")){
+          $("#" + this.weapons.position).removeClass("weapon");
           this.weapons.position = Math.floor(Math.random() * 99);
         }
 
@@ -147,56 +151,46 @@ class Grille {
       $("#" + index).css("background-image", perso.visu);
       
 
-      // On supprime l'arme de la case du tableau et on y ajoute celle du personnage
-      // let weaponPos = this.weapons.indexOf(weapon);
-      // this.weapons.splice(weaponPos, 1);
-      // this.weapons.push(previousWeapon);
 
-      // console.log(this.weapons);
 
       $("#actions").prepend("Le joueur à récupéré l'arme " + weapon.name + ".</br>");
       console.log(perso.swap);
  
     }
 
-    // displayWeapons () {
+    move (index, perso, direction) {
+
+
       
-    //   this.weapons.forEach(function(weapon){
+      // C'est ici que ça se passe                                                            !!!!!!!!!
+      if (perso.swapweapon != 0){
+
+        // if (this.perso.position != weapon.position){
+
           
-    //     let weaponAttr = $("#" + weapon.position).attr("style");
+        // }
 
-    //     if (typeof weaponAttr !== typeof undefined && weaponAttr !== false) {
-    //       // c'est pas weapon position. c'est la place de l'autre arme
-    //     }else {
-    //         $("#" + weapon.position).css("background-image", weapon.visual);
-    //         console.log("t" + weapon.position);
-    //       }
+        //La position est mauvaise
+        console.log("Perso");
+        console.log(perso.position);
+        console.log("swapweapon");
+        console.log(perso.swapweapon.position); // même position
+        let emplacement = index; // Il faudrait pouvoir y acceder lorsque le joueur sort de  la case
+        $("#" + perso.swapweapon.position).css("background-image", perso.swapweapon.visual);// swapweapon n'est pas au bon endroit
+        perso.swapweapon = 0;
         
-    //   });
+      }
+      let selectedWeapon = $("#" + index).data("data-weapon");
 
-    // }
 
-    move (index, perso, weapon, direction) {
 
-        let selectedWeapon = $("#" + index).data("data-weapon");
-        this.weapons[selectedWeapon];
 
       if ($("#" + index).data("data-weapon")){
         
         this.swapWeapon(index, this.weapons[selectedWeapon], perso);
-        // weapon devrait etre l'arme de la case
+        
 
       }
-
-
-      
-
-      if (perso.swapweapon != 0){
-
-        $("#" + perso.swapweapon.position).css("background-image", perso.swapweapon.visual);
-        perso.swapweapon = 0;
-      }
-      
       // Si le personnage apparait sur un mur
 
       if ($("#" + index).hasClass("wall")){
@@ -217,9 +211,36 @@ class Grille {
 
       $("#" + perso.pos).css("background-image", perso.visu);
       $("#actions").prepend("Le joueur s'est déplacé " + direction + "</br>");
-      
-      
+      // $("#" + index).data("data-weapon", previousWeapon.length);               un truc comme ça
 
+      if (perso.position === perso2.position|| perso.position -1 === perso.position || perso.position +1 === perso.position || perso.position -10 === perso2.position || perso.position +10 === perso2.position || perso.position +9 === perso2.position || perso.position -9 === perso2.position || perso.position +11 === perso2.position || perso.position -11 === perso2.position) {
+
+        console.log("Fight ! Tappez D pour vous défendre ou A pour attaquer"); // mettre un son et a insérer dans le dom
+      
+        // Le joueur peut choisir d’attaquer ou de se défendre contre le prochain coup
+        $(document).keydown(function(e){
+            if (e.which == 65) {//Attaquer
+                attack(this.perso); 
+              
+            }else if (e.which == 68) {//Défendre
+                defense();
+             
+            }else {
+                console.log("Tappez D pour vous défendre ou A pour attaquer");
+            }
+      
+        });
+      
+      
+      }
+      
+      perso.nbtour -= 1;
+
+      if (perso.nbtour == 0) {
+        perso.nbtour = 3;
+        perso = perso2; // l'autre personnage
+        
+      }
       
     }
 

@@ -54,7 +54,7 @@ class Jeu {
           let newPosition = perso1.position + 1; //le +1 pose problème pour la premiere ligne
           // $("#" + perso1.pos).addClass("perso1"); 
           let direction = "à droite.";
-          grille.move(newPosition, perso1, perso1.weapon, direction);
+          grille.move(newPosition, perso1, direction);
           //modifier attribut style
         }
         if (e.which == 37) {//Gauche
@@ -62,7 +62,7 @@ class Jeu {
           let newPosition = perso1.position - 1;
           // $("#" + perso1.pos).addClass("perso1");
           let direction = "à gauche.";
-          grille.move(newPosition, perso1, perso1.weapon, direction);
+          grille.move(newPosition, perso1, direction);
          
         }
         if (e.which == 38) {//Haut
@@ -71,15 +71,15 @@ class Jeu {
           let newPosition = perso1.position - 10;
           // $("#" + perso1.pos).addClass("perso1");
           let direction = "en haut.";
-          grille.move(newPosition, perso1, perso1.weapon, direction);
+          grille.move(newPosition, perso1, direction);
          
         }
         if (e.which == 40) {//Bas
           $("#" + perso1.pos).removeAttr("style");
-          let newPosition = perso1.position + 10;
+          let newPosition = perso1.position + 10;  //il faut chopper newPosition
           // $("#" + perso1.pos).addClass("perso1");
           let direction = "en bas.";
-          grille.move(newPosition, perso1, perso1.weapon, direction);
+          grille.move(newPosition, perso1, direction);
           
         }
         

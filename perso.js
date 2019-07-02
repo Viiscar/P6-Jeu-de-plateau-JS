@@ -39,6 +39,10 @@ class Perso {
   get visu () {
     return this.weapon.visual + "," + this.visual;
   }
+
+  get persoWeapon () {
+    return this.weapon;
+  }
   
   checkPosition (perso2) {
 
