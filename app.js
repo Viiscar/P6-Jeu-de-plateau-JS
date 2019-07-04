@@ -16,5 +16,4 @@ $(function() {
 
 //tour par tour
 
-
 // si une arme apparait sur un mur --> bug

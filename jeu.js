@@ -51,7 +51,7 @@ class Jeu {
   
         if (e.which == 39) {//Droite
           $("#" + perso1.pos).removeAttr("style");
-          let newPosition = perso1.position + 1; //le +1 pose problème pour la premiere ligne
+          let newPosition = perso1.position + 1;
           // $("#" + perso1.pos).addClass("perso1"); 
           let direction = "à droite.";
           grille.move(newPosition, perso1, direction);
@@ -62,7 +62,7 @@ class Jeu {
           let newPosition = perso1.position - 1;
           // $("#" + perso1.pos).addClass("perso1");
           let direction = "à gauche.";
-          grille.move(newPosition, perso1, direction);
+          grille.move(newPosition, perso1, perso2, direction);
          
         }
         if (e.which == 38) {//Haut
@@ -76,38 +76,13 @@ class Jeu {
         }
         if (e.which == 40) {//Bas
           $("#" + perso1.pos).removeAttr("style");
-          let newPosition = perso1.position + 10;  //il faut chopper newPosition
+          let newPosition = perso1.position + 10;
           // $("#" + perso1.pos).addClass("perso1");
           let direction = "en bas.";
           grille.move(newPosition, perso1, direction);
           
         }
         
-        // grille.weapons.forEach(function(weapon){
-          
-  
-        //     if (perso1.position == weapon.position) {
-        //       grille.swapWeapon(weapon.position, weapon, perso1);
-          
-              
-        //     }
-          
-  
-  
-        // });
-
-
-        //ici mettre du truc du genre
-        //if (perso1.position.Data())
-
-        // $("#" + cell).data("data-weapon", i);
-
-        //jQuery.hasData(element)
-
-        // if (perso1.position.jQuery.data("data-weapon")){
-        //   console.log("merde");
-        // };
-
   
    
       

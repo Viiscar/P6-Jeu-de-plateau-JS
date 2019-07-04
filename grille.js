@@ -171,7 +171,7 @@ class Grille {
  
     }
 
-    move (index, perso, direction) {
+    move (index, perso, perso2, direction) {
 
 
       
@@ -206,7 +206,7 @@ class Grille {
       }
       // Si le personnage apparait sur un mur
 
-      if ($("#" + index).hasClass("wall")){
+      if ($("#" + index).hasClass("wall")){   //Dans la premère ligne l'index a la classe wall et pourtant le perso bouge
         
       } else {
         perso.position = index;
@@ -224,9 +224,9 @@ class Grille {
 
       $("#" + perso.pos).css("background-image", perso.visu);
       $("#actions").prepend("Le joueur s'est déplacé " + direction + "</br>");
-      // $("#" + index).data("data-weapon", previousWeapon.length);               un truc comme ça
 
-      if (perso.position === perso2.position|| perso.position -1 === perso.position || perso.position +1 === perso.position || perso.position -10 === perso2.position || perso.position +10 === perso2.position || perso.position +9 === perso2.position || perso.position -9 === perso2.position || perso.position +11 === perso2.position || perso.position -11 === perso2.position) {
+      
+      if (perso.position === perso2.position|| perso.position -1 === perso2.position || perso.position +1 === perso.position || perso.position -10 === perso2.position || perso.position +10 === perso2.position || perso.position +9 === perso2.position || perso.position -9 === perso2.position || perso.position +11 === perso2.position || perso.position -11 === perso2.position) {
 
         console.log("Fight ! Tappez D pour vous défendre ou A pour attaquer"); // mettre un son et a insérer dans le dom
       
@@ -246,12 +246,14 @@ class Grille {
       
       
       }
+
+      // Tour par tour
       
       perso.nbtour -= 1;
 
       if (perso.nbtour == 0) {
         perso.nbtour = 3;
-        perso = perso2; // l'autre personnage
+        perso = perso2; // comment sélectionner l'autre personnage ?
         
       }
       
