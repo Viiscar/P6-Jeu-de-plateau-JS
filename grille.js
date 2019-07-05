@@ -38,18 +38,6 @@ class Grille {
 
     };
 
-    // generateGrille(){
-    //     let ligne = new Array(this.hauteur);
-    //     for (let i = 0; i < this.hauteur; i++) {
-    //         ligne [i] = new Array(this.largeur);
-    //         for (let j=0; j < this.largeur; j++) {
-    //             ligne [i][j] = "test";
-    //         }
-
-    //     }
-        
-    // }
-
     createGrille() {
       
       let table = $("<table></table>");
@@ -90,7 +78,7 @@ class Grille {
         
         $("#" + this.personnages[i].position).css("background-image", this.personnages[i].visu);
         
-        //Si la position du personnage commence par 0, alor parseInt
+        //Si la position du personnage commence par 0, alors parseInt                                 !!!!!!! à vérifier si c'est utile
         if (/^0/.test(this.personnages[i].position)) {
           this.personnages[i].position = parseInt(this.personnages[i].position);
         }
@@ -131,7 +119,7 @@ class Grille {
         console.log(i);
         console.log(this.weapons);
      
-        $("#" + cell).data("data-weapon", i); // C'est parce que c'est la weapon indexée 0 ?
+        $("#" + cell).data("data-weapon", i);
         
         //Si une arme apparait sur un mur
         if ($(".weapon").hasClass("wall")){
@@ -173,44 +161,43 @@ class Grille {
 
     move (index, perso, perso2, direction) {
 
+      //Trouver une meilleure solution que paralel avec un setter
+      let indexParalel = index ;
 
-      
-      // C'est ici que ça se passe                                                            !!!!!!!!!
-      if (perso.swapweapon != 0){
-
-        // if (this.perso.position != weapon.position){
-
-          
-        // }
-
-        //La position est mauvaise
-        console.log("Perso");
-        console.log(perso.position);
-        console.log("swapweapon");
-        console.log(perso.swapweapon.position); // même position
-        let emplacement = index; // Il faudrait pouvoir y acceder lorsque le joueur sort de  la case ?
-        $("#" + perso.swapweapon.position).css("background-image", perso.swapweapon.visual);// swapweapon n'est pas au bon endroit
-        perso.swapweapon = 0;
-        
+      if (indexParalel < 10) {
+        indexParalel = "0" + index; 
       }
-      let selectedWeapon = $("#" + index).data("data-weapon");
-
-
-
-
-      if ($("#" + index).data("data-weapon")){
-        
-        this.swapWeapon(index, this.weapons[selectedWeapon], perso);
-        
-
-      }
-      // Si le personnage apparait sur un mur
-
-      if ($("#" + index).hasClass("wall")){   //Dans la premère ligne l'index a la classe wall et pourtant le perso bouge
+       // Si le personnage apparait sur un mur
+      if ($("#" + indexParalel).hasClass("wall")){   //Dans la premère ligne l'index a la classe wall et pourtant le perso bouge
         
       } else {
         perso.position = index;
         perso.weapon.position = index;
+      }
+
+      
+                                                      
+      if (perso.swapweapon != 0){
+
+
+        console.log("swapweapon");
+        console.log(perso.swapweapon.position);
+        
+        $("#" + perso.swapweapon.position).css("background-image", perso.swapweapon.visual);
+        perso.swapweapon = 0;
+        
+      }
+      let selectedWeapon = $("#" + indexParalel).data("data-weapon");
+      console.log(index);
+
+
+
+
+      if(typeof $("#" + indexParalel).data("data-weapon") != "undefined") {
+        console.log("if");
+        this.swapWeapon(indexParalel, this.weapons[selectedWeapon], perso);
+        
+
       }
 
       //si le personage sort du cadre

@@ -27,9 +27,7 @@ class Perso {
   }
 
   // set pos () {
-  //   set lang(lang) {
-  //     this.language = lang.toUpperCase();
-  //   }
+    
   // }
 
   get swap () {

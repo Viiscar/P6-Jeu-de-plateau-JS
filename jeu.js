@@ -43,11 +43,6 @@ class Jeu {
         //Déplacement des personnages
         $(document).keydown(function(e){
 
-       
-        // grille.displayWeapons ();
-        // let previousPoistion = perso1.lastPos;
-        // console.log(previousPoistion); // undifined
-
   
         if (e.which == 39) {//Droite
           $("#" + perso1.pos).removeAttr("style");

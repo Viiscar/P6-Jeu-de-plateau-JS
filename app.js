@@ -5,10 +5,7 @@ $(function() {
 
 });
 
-
-//perso.swapweapon.position a un une case de retard
-
-// hache simple (weapon1) n'est pas échangée
+// changer get pos par get position
 
 // armes et murs de la première ligne ... 
 
