@@ -5,12 +5,13 @@ $(function() {
 
 });
 
-// changer get pos par get position
 
-// armes et murs de la première ligne ... 
+
 
 // Fight
 
 //tour par tour
 
-// si une arme apparait sur un mur --> bug
+// si une arme apparait sur un mur --> bug   --> ok mais dédouble le code
+
+// le reswap ne fonctionne pas

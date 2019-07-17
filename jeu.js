@@ -19,6 +19,10 @@ class Jeu {
         let perso1 = new Perso("Joueur 1", 'url("perso1.png")', weapon0);
         let perso2 = new Perso("Joueur 2", 'url("perso2.png")', weapon0);
 
+
+        let persoList = [perso1, perso2];
+
+
         //Création de la grille avec les personnages et les armes
         let grille = new Grille(10,10, [perso1, perso2], [weapon1, weapon2, weapon3, weapon4]);
 
@@ -40,46 +44,77 @@ class Jeu {
         $("#stats").append("J1 :" + "arme : "+ perso1.weapon.name + " puissance : " + perso1.weapon.damage +"</br>");
         $("#stats").append("J2 :" + "arme : "+ perso2.weapon.name + " puissance : " + perso2.weapon.damage +"</br>");
 
+
         //Déplacement des personnages
         $(document).keydown(function(e){
 
+          // if (currentPerso.nbtour == 0) {
+            
+          //   currentPerso.nbtour = 3;
+          //   persoList =[perso2, perso1];
+      
+          // }
+
+          
+          let currentPerso = swapPerso();
+
+          function swapPerso() {
+            let currentPerso = persoList[0]
+            console.log("avant if " + persoList[0].name)
+            if (currentPerso.nbtour == 0) {
+            
+              currentPerso.nbtour = 3;
+
+              console.log("apres if");
+
+              
+              let temp = persoList[0];
+            
+              persoList[0] = persoList[1];
+              persoList[1] = temp;
+
+              console.log(persoList[0].name);
+              currentPerso = persoList[0]
+
+            }
+            
+            return currentPerso
+            
+          }
+
+          
+
+
   
         if (e.which == 39) {//Droite
-          $("#" + perso1.pos).removeAttr("style");
-          let newPosition = perso1.position + 1;
-          // $("#" + perso1.pos).addClass("perso1"); 
+          $("#" + parseInt(perso1.pos)).removeAttr("style");
+          let newPosition = parseInt(currentPerso.pos) + 1; // currentperso.pos
           let direction = "à droite.";
           grille.move(newPosition, perso1, direction);
           //modifier attribut style
         }
         if (e.which == 37) {//Gauche
-          $("#" + perso1.pos).removeAttr("style");
-          let newPosition = perso1.position - 1;
-          // $("#" + perso1.pos).addClass("perso1");
+          $("#" + parseInt(perso1.pos)).removeAttr("style");
+          let newPosition = parseInt(currentPerso.pos) - 1;
           let direction = "à gauche.";
-          grille.move(newPosition, perso1, perso2, direction);
+          grille.move(newPosition, perso1, direction);
          
         }
         if (e.which == 38) {//Haut
   
-          $("#" + perso1.pos).removeAttr("style");
-          let newPosition = perso1.position - 10;
-          // $("#" + perso1.pos).addClass("perso1");
+          $("#" + parseInt(perso1.pos)).removeAttr("style");
+          let newPosition = parseInt(currentPerso.pos) - 10;
           let direction = "en haut.";
           grille.move(newPosition, perso1, direction);
          
         }
         if (e.which == 40) {//Bas
-          $("#" + perso1.pos).removeAttr("style");
-          let newPosition = perso1.position + 10;
-          // $("#" + perso1.pos).addClass("perso1");
+          $("#" + parseInt(perso1.pos)).removeAttr("style");
+          let newPosition = parseInt(currentPerso.pos) + 10;
           let direction = "en bas.";
           grille.move(newPosition, perso1, direction);
           
         }
-        
-  
-   
       
 
         

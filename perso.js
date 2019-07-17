@@ -18,17 +18,29 @@ class Perso {
 
   }
   get pos () {
-    
-    if (this.position < 10) {
-      return "0" + this.position;
-
-    }else
+  
      return this.position;
-  }
-
-  // set pos () {
     
-  // }
+  }
+//                                           ici !!!!!!!!!!!!!!!!!!!!!!!
+  set pos (valeur) {
+    // if (/^0/.test(this.position)) {
+    //   console.log("not a number");
+    //   this.position = parseInt(this.position);
+    // }
+
+    this.position = parseInt(valeur);
+    
+    // if(typeof this.position != "number") {
+    //   this.position = parseInt(this.position);
+    //   console.log("not a number");
+    // }
+
+    // if (this.position < 10) {
+    //   this.position = "0" + this.position; 
+    // }
+
+}
 
   get swap () {
     return this.swapweapon;
