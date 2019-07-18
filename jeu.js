@@ -1,8 +1,7 @@
 class Jeu {
-    constructor(grille, perso, weapon) {
-        this.grille = grille;
-        this.perso = perso;
-        this.weapon = weapon; 
+    constructor() {
+        this.grille;
+
       }
 
 
@@ -19,26 +18,26 @@ class Jeu {
         let perso1 = new Perso("Joueur 1", 'url("perso1.png")', weapon0);
         let perso2 = new Perso("Joueur 2", 'url("perso2.png")', weapon0);
 
-
-        let persoList = [perso1, perso2];
+        console.log(this);
+        
 
 
         //Création de la grille avec les personnages et les armes
-        let grille = new Grille(10,10, [perso1, perso2], [weapon1, weapon2, weapon3, weapon4]);
+        this.grille = new Grille(10,10, [perso1, perso2], [weapon1, weapon2, weapon3, weapon4]);
 
-        grille.createGrille();
+        this.grille.createGrille();
 
-        grille.greyCells();
+        this.grille.greyCells();
 
         //check
         perso1.checkPosition (perso2)
     
         //Insertion des personnages
-        grille.insertPlayers();
+        this.grille.insertPlayers();
      
     
         //Insertion des armes    
-        grille.insertWeapons();
+        this.grille.insertWeapons();
     
         //Insertion des stats de personnages
         $("#stats").append("J1 :" + "arme : "+ perso1.weapon.name + " puissance : " + perso1.weapon.damage +"</br>");
@@ -55,75 +54,73 @@ class Jeu {
       
           // }
 
-          
-          let currentPerso = swapPerso();
-
-          function swapPerso() {
-            let currentPerso = persoList[0]
-            console.log("avant if " + persoList[0].name)
-            if (currentPerso.nbtour == 0) {
-            
-              currentPerso.nbtour = 3;
-
-              console.log("apres if");
-
-              
-              let temp = persoList[0];
-            
-              persoList[0] = persoList[1];
-              persoList[1] = temp;
-
-              console.log(persoList[0].name);
-              currentPerso = persoList[0]
-
-            }
-            
-            return currentPerso
-            
-          }
-
-          
+          //Gestion des tours
+          let currentPerso = this.swapPerso();
+          console.log(this);
 
 
   
         if (e.which == 39) {//Droite
-          $("#" + parseInt(perso1.pos)).removeAttr("style");
+          $("#" + parseInt(currentPerso.pos)).removeAttr("style");
           let newPosition = parseInt(currentPerso.pos) + 1; // currentperso.pos
           let direction = "à droite.";
-          grille.move(newPosition, perso1, direction);
+          this.grille.move(newPosition, currentPerso, direction);
           //modifier attribut style
         }
         if (e.which == 37) {//Gauche
-          $("#" + parseInt(perso1.pos)).removeAttr("style");
+          $("#" + parseInt(currentPerso.pos)).removeAttr("style");
           let newPosition = parseInt(currentPerso.pos) - 1;
           let direction = "à gauche.";
-          grille.move(newPosition, perso1, direction);
+          this.grille.move(newPosition, currentPerso, direction);
          
         }
         if (e.which == 38) {//Haut
   
-          $("#" + parseInt(perso1.pos)).removeAttr("style");
+          $("#" + parseInt(currentPerso.pos)).removeAttr("style");
           let newPosition = parseInt(currentPerso.pos) - 10;
           let direction = "en haut.";
-          grille.move(newPosition, perso1, direction);
+          this.grille.move(newPosition, currentPerso, direction);
          
         }
         if (e.which == 40) {//Bas
-          $("#" + parseInt(perso1.pos)).removeAttr("style");
+          $("#" + parseInt(currentPerso.pos)).removeAttr("style");
           let newPosition = parseInt(currentPerso.pos) + 10;
           let direction = "en bas.";
-          grille.move(newPosition, perso1, direction);
+          this.grille.move(newPosition, currentPerso, direction);
           
         }
       
 
         
-      });
+      }.bind(this));
       
 
     
     }
 
 
-    
+    swapPerso() {
+      let currentPerso = this.grille.personnages[0];
+      // console.log("avant if " + persoList[0].name)
+      if (currentPerso.nbtour === 0) {
+      
+        this.grille.personnages[0].nbtour = 3;
+
+        // console.log("apres if");
+
+        
+        let temp = this.grille.personnages[0];
+      
+        this.grille.personnages[0] = this.grille.personnages[1];
+        this.grille.personnages[1] = temp;
+
+        // console.log(persoList[0].name);
+        // currentPerso = persoList[0]
+        $("#actions").prepend("Au tour du " + this.grille.personnages[0].name + "</br>");
+
+      }
+      
+      return currentPerso;
+      
+    }
 };

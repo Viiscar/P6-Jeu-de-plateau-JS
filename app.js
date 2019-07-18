@@ -10,7 +10,7 @@ $(function() {
 
 // Fight
 
-//tour par tour
+//tour par tour ==> Done
 
 // si une arme apparait sur un mur --> bug   --> ok mais dédouble le code
 

@@ -208,33 +208,43 @@ class Grille {
     }
 
     $("#" + perso.pos).css("background-image", perso.visu);
-    $("#actions").prepend("Le joueur s'est déplacé " + direction + "</br>");
+    $("#actions").prepend("Le " + perso.name + " s'est déplacé " + direction + "</br>");
 
-    
-    // if (perso.pos === perso2.position|| perso.pos -1 === perso2.position || perso.pos +1 === perso.pos || perso.pos -10 === perso2.position || perso.pos +10 === perso2.position || perso.pos +9 === perso2.position || perso.pos -9 === perso2.position || perso.pos +11 === perso2.position || perso.pos -11 === perso2.position) {
+    // if (perso.pos === perso2.position || perso.pos -1 === perso2.position || perso.pos +1 === perso.pos || perso.pos -10 === perso2.position || perso.pos +10 === perso2.position || perso.pos +9 === perso2.position || perso.pos -9 === perso2.position || perso.pos +11 === perso2.position || perso.pos -11 === perso2.position) {
 
     //   console.log("Fight ! Tappez D pour vous défendre ou A pour attaquer"); // mettre un son et a insérer dans le dom
     
     //   // Le joueur peut choisir d’attaquer ou de se défendre contre le prochain coup
-    //   $(document).keydown(function(e){
-    //       if (e.which == 65) {//Attaquer
-    //           attack(this.perso); 
+    //   // $(document).keydown(function(e){
+    //   //     if (e.which == 65) {//Attaquer
+    //   //         attack(this.perso); 
             
-    //       }else if (e.which == 68) {//Défendre
-    //           defense();
+    //   //     }else if (e.which == 68) {//Défendre
+    //   //         defense();
             
-    //       }else {
-    //           console.log("Tappez D pour vous défendre ou A pour attaquer");
-    //       }
+    //   //     }else {
+    //   //         console.log("Tappez D pour vous défendre ou A pour attaquer");
+    //   //     }
     
-    //   });
+    //   // });
+    // }
 
     // Tour par tour
+    console.log("t "+ perso.nbtour);
     perso.nbtour -= 1;
     
     
     
+    
   }
+
+  // persoMeet (index) {
+    
+  //   if ( === )
+
+  // }
+
+  
 
       
 }
