@@ -72,10 +72,6 @@ class Grille {
       if ($(".perso").hasClass("weapon")){
         this.personnages[i].position = Math.floor(Math.random() * 99);
       }
-
-      if (this.personnages[i].position < 10) {
-        this.personnages[i].position = "0" + this.personnages[i].position;
-      }
       
       $("#" + this.personnages[i].position).css("background-image", this.personnages[i].visu);
     
@@ -231,7 +227,7 @@ class Grille {
 
     // Tour par tour
     console.log("t "+ perso.nbtour);
-    perso.nbtour -= 1;
+    this.personnages[0].nbtour -= 1;
     
     
     
