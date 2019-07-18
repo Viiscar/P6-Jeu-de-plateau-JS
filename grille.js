@@ -226,7 +226,7 @@ class Grille {
     // }
 
     // Tour par tour
-    console.log("t "+ perso.nbtour);
+    // console.log("t "+ perso.nbtour);
     this.personnages[0].nbtour -= 1;
     
     
@@ -234,11 +234,7 @@ class Grille {
     
   }
 
-  // persoMeet (index) {
-    
-  //   if ( === )
 
-  // }
 
   
 

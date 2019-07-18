@@ -38,3 +38,27 @@ if (perso1.position === perso2.position|| perso1.position -1 === perso2.position
   }
 
 
+  function swapPerso() {
+    let currentPerso = persoList[0]
+    // console.log("avant if " + persoList[0].name)
+    if (currentPerso.nbtour == 0) {
+    
+      currentPerso.nbtour = 3;
+
+      // console.log("apres if");
+
+      
+      let temp = persoList[0];
+    
+      persoList[0] = persoList[1];
+      persoList[1] = temp;
+
+      // console.log(persoList[0].name);
+      currentPerso = persoList[0]
+      $("#actions").prepend("Au tour du " + persoList[0].name + "</br>");
+
+    }
+    
+    return currentPerso
+    
+  }
