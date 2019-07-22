@@ -36,8 +36,8 @@ class Jeu {
     this.grille.insertWeapons();
 
     //Insertion des stats de personnages
-    $("#stats").append('<span>J1</span> : ' + "arme : "+ perso1.weapon.name + " puissance : " + perso1.weapon.damage +"</br>");
-    $("#stats").append('<span>J2</span> : ' + "arme : "+ perso2.weapon.name + " puissance : " + perso2.weapon.damage +"</br>");
+    $("#stats").append('<span>J1</span> : ' + "Arme : "+ perso1.weapon.name + "</br>" + " Puissance : " + perso1.weapon.damage + "</br>" + " Santé : " + perso1.health +"</br>");
+    $("#stats").append('<span>J2</span> : ' + "Arme : "+ perso2.weapon.name + "</br>" + " Puissance : " + perso2.weapon.damage +"</br>" + " Santé : " + perso1.health +"</br>");
 
 
     //Déplacement des personnages
@@ -77,7 +77,7 @@ class Jeu {
         
       }
 
-      this.persoMeet (currentPerso);
+      this.persoMeet (currentPerso, this.grille.personnages[1], perso1, perso2);
   
     
     }.bind(this));
@@ -112,35 +112,38 @@ class Jeu {
   }
 
 
-  persoMeet (index) {
+  persoMeet (index, index2, p1, p2) {
 
     if ( index.position -1 === this.grille.personnages[1].position || index.position +1 === this.grille.personnages[1].position || index.position -10 === this.grille.personnages[1].position || index.position +10 === this.grille.personnages[1].position || index.position +9 === this.grille.personnages[1].position || index.position -9 === this.grille.personnages[1].position || index.position +11 === this.grille.personnages[1].position || index.position -11 === this.grille.personnages[1].position ){
       console.log("Fight ! Tappez D pour vous défendre ou A pour attaquer"); // mettre un son et a insérer dans le dom
 
       $("#actions").prepend('<span id = "fight">Fight !<span></br>');
 
+      //il faut gérer le chacun son tour ici et que defense s'active avant attack
+
       //ouverture du modal
       $('#myModal').modal('show');
 
       
-      console.log(this.swapPerso().name);
+      // console.log(this.swapPerso().name);
       // Le joueur peut choisir d’attaquer ou de se défendre contre le prochain coup
       $(document).keydown(function(e){
         //fermeture du modal
         $('#myModal').modal('hide');
         
         if (e.which == 65) {//Attaquer
-          index.attack(this.perso); 
+          
+          index.attack(index, index2, p1, p2 ); 
           
         }else if (e.which == 68) {//Défendre
-          index.defense();
-          
+          index.defense(index2);//index.defense is not a function
+          console.log(index2.weapon.damages);
         }else {
             console.log('Tappez D pour vous défendre ou A pour attaquer');
         }
 
         if (e.which == 37 || e.which == 38 || e.which == 39 || e.which == 40) {
-          console.log("oui!");
+          console.log("Interdiction de se déplacer!");
           // e.stopImmediatePropagation();
           // event.preventDefault();
           // event.stopPropagation()

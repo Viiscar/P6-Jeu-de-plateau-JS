@@ -6,14 +6,12 @@ $(function() {
 });
 
 
+// le combat ne se lance pas à chaque fois
+// lorsque le combat est lancé il faut désactiver les touches de direction
+//
+// defense() et attack() ne fonctionnent pas
 
-
-// Fight
-
-// lorsque le combat est lancé les touches de directions son activables
-
-//tour par tour ==> Done
+// le reswap ne fonctionne pas
 
 // si une arme apparait sur un mur --> bug   --> ok mais dédouble le code
 
-// le reswap ne fonctionne pas

@@ -73,28 +73,31 @@ class Perso {
   }
 
   // Attaque une cible
-  attack(target) {
-    
-    if (this.health > 0) {
+  attack(currentP, OtherP, p1 ,p2) {
+    // console.log(OtherP.name);
+    if (OtherP.health > 0) {
         //Dégats ocasionnés
-        const damages = this.weapon.damage;
-        target.health -= damages;
+        const damages = currentP.weapon.damage;
+        OtherP.health -= damages;
 
         //En cas de mort
-        if (target.health <= 0) {
+        if (OtherP.health <= 0) {
             
-            target.health = 0;
-            console.log("Game over");
+          OtherP.health = 0;
+            console.log("Game over"); //ici mettre un modal 
         }
 
-
+        $("#stats").html('<span>J2</span> : ' + "Arme : "+ p1.weapon.name + "</br>" + " Puissance : " + p1.weapon.damage +"</br>" + " Santé : " + p1.health +"</br>");
+        $("#stats").append('<span>J2</span> : ' + "Arme : "+ p2.weapon.name + "</br>" + " Puissance : " + p2.weapon.damage +"</br>" + " Santé : " + p2.health +"</br>");
     }
+
+    console.log(OtherP.health);
         
   }
 
   //Lorsque le joueur se défend, il encaisse 50% de dégâts en moins qu’en temps normal
-  defence() {
-    const damages = w.weapon.damages / 2;
+  defence(OtherP) { //index.defense is not a function
+    const damages = OtherP.weapon.damages / 2;
     
   }
  
