@@ -94,7 +94,7 @@ class Perso {
 
   //Lorsque le joueur se défend, il encaisse 50% de dégâts en moins qu’en temps normal
   defence() {
-    const damages = this.weapon.damages / 2;
+    const damages = w.weapon.damages / 2;
     
   }
  

@@ -120,14 +120,6 @@ class Grille {
       console.log(this.weapons);
     
       $("#" + cell).data("data-weapon", i);
-      
-      //Si une arme apparait sur un mur
-      // if ($("#" + cell).hasClass("wall")){
-      //   $("#" + cell).removeClass("weapon");
-      //   this.weapons.position = Math.floor(Math.random() * 99);
-      // }
-
-
       $("#" + cell).css("background-image", this.weapons[i].visual);
 
       
@@ -136,7 +128,7 @@ class Grille {
 
   }
 
-  swapWeapon (index, weapon, perso) {
+  swapWeapon (index, weapon, perso, p1, p2) {
     
     let previousWeapon = perso.weapon;
     perso.swapweapon = previousWeapon;
@@ -150,19 +142,19 @@ class Grille {
 
 
 
-    $("#actions").prepend("Le joueur à récupéré l'arme " + weapon.name + ".</br>");
+    $("#actions").prepend('<div id = "changeW">Le ' + perso.name + " à récupéré l'arme " + weapon.name + ".</br></div>");
+    $("#stats").html('<span>J1</span> : ' + "arme : "+ p1.weapon.name + " puissance : " + p1.weapon.damage +"</br>");
+    $("#stats").append('<span>J2</span> : ' + "arme : "+ p2.weapon.name + " puissance : " + p2.weapon.damage +"</br>");
     console.log(perso.swap);
+
 
   }
 
-  move (index, perso, direction) {  //utiliser pos a la place de paralel
+  move (index, perso, direction, p1, p2) { 
 
-    //index === valeur ? faire appel au setter que lorqu'il faut mettre en string
-    // if (index < 10) {
-    //   index = "0" + index; 
-    // }
+
       // Si le personnage apparait sur un mur
-    if ($("#" + index).hasClass("wall")){   //Dans la premère ligne l'index a la classe wall et pourtant le perso bouge
+    if ($("#" + index).hasClass("wall")){ 
       
     } else {
       perso.pos = index;
@@ -185,11 +177,9 @@ class Grille {
     console.log(index);
 
 
-
-
     if(typeof $("#" + perso.pos).data("data-weapon") != "undefined") {
       console.log("if");
-      this.swapWeapon(perso.pos, this.weapons[selectedWeapon], perso);
+      this.swapWeapon(perso.pos, this.weapons[selectedWeapon], perso, p1, p2);
       
 
     }
@@ -206,24 +196,6 @@ class Grille {
     $("#" + perso.pos).css("background-image", perso.visu);
     $("#actions").prepend("Le " + perso.name + " s'est déplacé " + direction + "</br>");
 
-    // if (perso.pos === perso2.position || perso.pos -1 === perso2.position || perso.pos +1 === perso.pos || perso.pos -10 === perso2.position || perso.pos +10 === perso2.position || perso.pos +9 === perso2.position || perso.pos -9 === perso2.position || perso.pos +11 === perso2.position || perso.pos -11 === perso2.position) {
-
-    //   console.log("Fight ! Tappez D pour vous défendre ou A pour attaquer"); // mettre un son et a insérer dans le dom
-    
-    //   // Le joueur peut choisir d’attaquer ou de se défendre contre le prochain coup
-    //   // $(document).keydown(function(e){
-    //   //     if (e.which == 65) {//Attaquer
-    //   //         attack(this.perso); 
-            
-    //   //     }else if (e.which == 68) {//Défendre
-    //   //         defense();
-            
-    //   //     }else {
-    //   //         console.log("Tappez D pour vous défendre ou A pour attaquer");
-    //   //     }
-    
-    //   // });
-    // }
 
     // Tour par tour
     // console.log("t "+ perso.nbtour);

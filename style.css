@@ -1,10 +1,12 @@
 #plateau {
-    background-color: brown;
+    background-color: #28A745;
+    border-right : 0.5px solid black;
     
 }
 
 #info {
-    background-color: aqua;
+
+    background-color: #F1F1F1;
     padding: 0px;
     height:100vh;
     overflow: hidden;
@@ -12,14 +14,37 @@
 
 #stats {
     border: 3px solid black;
-    background-color: azure;
+    background-color: #B9F6CA;
     padding-left: 15px;
+}
+
+#actions {
+    padding: 4px;
+}
+
+#changeP {
+    color: #0D47A1;
+    font-weight: bold;
+}
+
+#changeW {
+    color: #CC0000;
+    font-weight: bold;
+}
+
+span {
+    font-weight: bold;
 }
 
 table {
     width: 100%;
     height: 100vh;
     background-image: url('grass.png');
+}
+
+#fight {
+    color: #E53935;
+    font-weight: bold;
 }
 
 tr {
