@@ -136,7 +136,7 @@ class Jeu {
           index.attack(index, index2, p1, p2 ); 
           
         }else if (e.which == 68) {//Défendre
-          index.defense(index2);//index.defense is not a function
+          index.defence(index, index2, p1, p2);//NAN
           console.log(index2.weapon.damages);
         }else {
             console.log('Tappez D pour vous défendre ou A pour attaquer');
@@ -146,8 +146,8 @@ class Jeu {
           console.log("Interdiction de se déplacer!");
           // e.stopImmediatePropagation();
           // event.preventDefault();
-          // event.stopPropagation()
-          return false;
+          // e.stopPropagation()
+          // return false;
         }
  
       });

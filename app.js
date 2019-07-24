@@ -5,11 +5,13 @@ $(function() {
 
 });
 
+// P1 4 tours: je crois que le probleme vient de swapperso
 
 // le combat ne se lance pas à chaque fois
+
 // lorsque le combat est lancé il faut désactiver les touches de direction
 //
-// defense() et attack() ne fonctionnent pas
+// defense() ne fonctionnent pas
 
 // le reswap ne fonctionne pas
 
