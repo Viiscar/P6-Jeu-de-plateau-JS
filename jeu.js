@@ -1,6 +1,7 @@
 class Jeu {
   constructor() {
       this.grille;
+      this.attack = false;
 
     }
 
@@ -39,45 +40,74 @@ class Jeu {
     $("#stats").append('<span>J1</span> : ' + "Arme : "+ perso1.weapon.name + "</br>" + " Puissance : " + perso1.weapon.damage + "</br>" + " Santé : " + perso1.health +"</br>");
     $("#stats").append('<span>J2</span> : ' + "Arme : "+ perso2.weapon.name + "</br>" + " Puissance : " + perso2.weapon.damage +"</br>" + " Santé : " + perso1.health +"</br>");
 
-
+    console.log(this.grille);
     //Déplacement des personnages
     $(document).keydown(function(e){
 
 
-      //Gestion des tours
-      let currentPerso = this.swapPerso();
+     
+      console.log(this.grille);
 
-      if (e.which == 39) {//Droite
-        $("#" + parseInt(currentPerso.pos)).removeAttr("style");
-        let newPosition = parseInt(currentPerso.pos) + 1; // currentperso.pos
-        let direction = "à droite.";
-        this.grille.move(newPosition, currentPerso, direction, perso1, perso2);
-        //modifier attribut style
-      }
-      if (e.which == 37) {//Gauche
-        $("#" + parseInt(currentPerso.pos)).removeAttr("style");
-        let newPosition = parseInt(currentPerso.pos) - 1;
-        let direction = "à gauche.";
-        this.grille.move(newPosition, currentPerso, direction, perso1, perso2);
-      
-      }
-      if (e.which == 38) {//Haut
+      if (!this.attack){
 
-        $("#" + parseInt(currentPerso.pos)).removeAttr("style");
-        let newPosition = parseInt(currentPerso.pos) - 10;
-        let direction = "en haut.";
-        this.grille.move(newPosition, currentPerso, direction, perso1, perso2);
-      
-      }
-      if (e.which == 40) {//Bas
-        $("#" + parseInt(currentPerso.pos)).removeAttr("style");
-        let newPosition = parseInt(currentPerso.pos) + 10;
-        let direction = "en bas.";
-        this.grille.move(newPosition, currentPerso, direction, perso1, perso2);
+        if (e.which == 39) {//Droite
+          $("#" + parseInt(this.grille.personnages[0].pos)).removeAttr("style");
+          let newPosition = parseInt(this.grille.personnages[0].pos) + 1; // this.grille.personnages[0].pos
+          let direction = "à droite.";
+          this.grille.move(newPosition, this.grille.personnages[0], direction, perso1, perso2);
+          //modifier attribut style
+        }
+        if (e.which == 37) {//Gauche
+          $("#" + parseInt(this.grille.personnages[0].pos)).removeAttr("style");
+          let newPosition = parseInt(this.grille.personnages[0].pos) - 1;
+          let direction = "à gauche.";
+          this.grille.move(newPosition, this.grille.personnages[0], direction, perso1, perso2);
         
-      }
+        }
+        if (e.which == 38) {//Haut
+  
+          $("#" + parseInt(this.grille.personnages[0].pos)).removeAttr("style");
+          let newPosition = parseInt(this.grille.personnages[0].pos) - 10;
+          let direction = "en haut.";
+          this.grille.move(newPosition, this.grille.personnages[0], direction, perso1, perso2);
+        
+        }
+        if (e.which == 40) {//Bas
+          $("#" + parseInt(this.grille.personnages[0].pos)).removeAttr("style");
+          let newPosition = parseInt(this.grille.personnages[0].pos) + 10;
+          let direction = "en bas.";
+          this.grille.move(newPosition, this.grille.personnages[0], direction, perso1, perso2);
+          
+        }
 
-      this.persoMeet (currentPerso, this.grille.personnages[1], perso1, perso2);
+      } else {
+
+        //Mode Attack
+
+        //fermeture du modal
+        // $('#myModal').modal('hide');
+        
+        if (e.which == 65) {//Attaquer
+          console.log("A");
+          
+          // index.attack(index, index2, p1, p2 ); 
+          
+        }else if (e.which == 68) {//Défendre
+          // index.defence(index, index2, p1, p2);
+          // console.log(index2.weapon.damages);
+          console.log("D");
+        }else {
+            console.log('Tappez D pour vous défendre ou A pour attaquer');
+        }
+
+        // index.nbtour = 0; //Le premier attaque 2 fois
+
+        }
+
+      //Gestion des tours
+      this.swapPerso();
+
+      this.persoMeet (this.grille.personnages[0], this.grille.personnages[1], perso1, perso2);
   
     
     }.bind(this));
@@ -86,11 +116,11 @@ class Jeu {
   }
 
 
-  swapPerso() {
-    let currentPerso = this.grille.personnages[0];
-    // console.log("avant if " + persoList[0].name)
-    if (currentPerso.nbtour === 0) {
+  swapPerso() {// comme il est appelé avant le combat ça fausse les tours ?
     
+    // console.log("avant if " + persoList[0].name)
+    if (this.grille.personnages[0].nbtour === 0) {
+
       this.grille.personnages[0].nbtour = 3;
 
       // console.log("apres if");
@@ -102,12 +132,11 @@ class Jeu {
       this.grille.personnages[1] = temp;
 
       // console.log(persoList[0].name);
-      // currentPerso = persoList[0]
+      // this.grille.personnages[0] = persoList[0]
       $("#actions").prepend('<div id = "changeP" >Au tour du ' + this.grille.personnages[0].name + "</br></div>");
 
     }
     
-    return currentPerso;
     
   }
 
@@ -124,33 +153,12 @@ class Jeu {
       //ouverture du modal
       $('#myModal').modal('show');
 
+      this.attack = true;
+
       
       // console.log(this.swapPerso().name);
       // Le joueur peut choisir d’attaquer ou de se défendre contre le prochain coup
-      $(document).keydown(function(e){
-        //fermeture du modal
-        $('#myModal').modal('hide');
-        
-        if (e.which == 65) {//Attaquer
-          
-          index.attack(index, index2, p1, p2 ); 
-          
-        }else if (e.which == 68) {//Défendre
-          index.defence(index, index2, p1, p2);//NAN
-          console.log(index2.weapon.damages);
-        }else {
-            console.log('Tappez D pour vous défendre ou A pour attaquer');
-        }
-
-        if (e.which == 37 || e.which == 38 || e.which == 39 || e.which == 40) {
-          console.log("Interdiction de se déplacer!");
-          // e.stopImmediatePropagation();
-          // event.preventDefault();
-          // e.stopPropagation()
-          // return false;
-        }
- 
-      });
+    
     }
   }
 };

@@ -11,7 +11,7 @@ $(function() {
 
 // lorsque le combat est lancé il faut désactiver les touches de direction
 //
-// defense() ne fonctionnent pas
+// faire le tour par tour et enregistrer les actions avant de les lancer
 
 // le reswap ne fonctionne pas
 

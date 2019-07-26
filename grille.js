@@ -95,7 +95,6 @@ class Grille {
     
         while (previousCells[j] == cell) {
           if (previousCells[j] == cell){
-            console.log("previousCells!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
           }
           this.weapons[i].position = Math.floor(Math.random() * 99);
           cell = this.weapons[i].position;
@@ -103,7 +102,6 @@ class Grille {
 
         while ($("#" + cell).hasClass("wall")) {
           if ($("#" + cell).hasClass("wall")){
-            console.log("cell).hasClass!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
           }
           this.weapons[i].position = Math.floor(Math.random() * 99);
           cell = this.weapons[i].position;
@@ -114,11 +112,7 @@ class Grille {
       
 
 
-      $("#" + cell).addClass("weapon");
-
-      console.log(i);
-      console.log(this.weapons);
-    
+      $("#" + cell).addClass("weapon");  
       $("#" + cell).data("data-weapon", i);
       $("#" + cell).css("background-image", this.weapons[i].visual);
 
@@ -146,7 +140,6 @@ class Grille {
     $("#stats").html('<span>J2</span> : ' + "Arme : "+ p1.weapon.name + "</br>" + " Puissance : " + p1.weapon.damage +"</br>" + " Santé : " + p1.health +"</br>");
     $("#stats").append('<span>J2</span> : ' + "Arme : "+ p2.weapon.name + "</br>" + " Puissance : " + p2.weapon.damage +"</br>" + " Santé : " + p2.health +"</br>");
 
-    console.log(perso.swap);
 
 
   }
@@ -166,20 +159,16 @@ class Grille {
                                                     
     if (perso.swapweapon != 0){
 
-
-      console.log("swapweapon");
-      console.log(perso.swapweapon.position);
       
       $("#" + perso.swapweapon.position).css("background-image", perso.swapweapon.visual);
       perso.swapweapon = 0;
       
     }
     let selectedWeapon = $("#" + perso.pos).data("data-weapon");
-    console.log(index);
 
 
     if(typeof $("#" + perso.pos).data("data-weapon") != "undefined") {
-      console.log("if");
+
       this.swapWeapon(perso.pos, this.weapons[selectedWeapon], perso, p1, p2);
       
 
