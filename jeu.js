@@ -40,13 +40,9 @@ class Jeu {
     $("#stats").append('<span>J1</span> : ' + "Arme : "+ perso1.weapon.name + "</br>" + " Puissance : " + perso1.weapon.damage + "</br>" + " Santé : " + perso1.health +"</br>");
     $("#stats").append('<span>J2</span> : ' + "Arme : "+ perso2.weapon.name + "</br>" + " Puissance : " + perso2.weapon.damage +"</br>" + " Santé : " + perso1.health +"</br>");
 
-    console.log(this.grille);
     //Déplacement des personnages
     $(document).keydown(function(e){
 
-
-     
-      console.log(this.grille);
 
       if (!this.attack){
 
@@ -88,19 +84,18 @@ class Jeu {
         // $('#myModal').modal('hide');
         
         if (e.which == 65) {//Attaquer
-          console.log("A");
           
-          // index.attack(index, index2, p1, p2 ); 
+          this.grille.personnages[0].attack(this.grille.personnages[0], this.grille.personnages[1], perso1, perso2); 
           
         }else if (e.which == 68) {//Défendre
-          // index.defence(index, index2, p1, p2);
+          //index.defence(index, index2, p1, p2);
+          this.grille.personnages[0].defence(this.grille.personnages[0], this.grille.personnages[1], perso1, perso2);
           // console.log(index2.weapon.damages);
-          console.log("D");
         }else {
             console.log('Tappez D pour vous défendre ou A pour attaquer');
         }
 
-        // index.nbtour = 0; //Le premier attaque 2 fois
+        this.grille.personnages[0].nbtour = 0; //Le premier attaque 2 fois
 
         }
 

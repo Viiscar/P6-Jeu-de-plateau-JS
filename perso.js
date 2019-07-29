@@ -15,6 +15,7 @@ class Perso {
     this.weapon.position = this.position;
     this.nbtour = 3;
     this.swapweapon = 0;
+    this.def = 1;
 
   }
   get pos () {
@@ -76,8 +77,10 @@ class Perso {
   attack(currentP, OtherP, p1 ,p2) {
     // console.log(OtherP.name);
     if (OtherP.health > 0) {
+      console.log(OtherP.health);
+      console.log(OtherP.def);
         //Dégats ocasionnés
-        let damages = currentP.weapon.damage;
+        let damages = currentP.weapon.damage * OtherP.def;
         OtherP.health -= damages;
 
         //En cas de mort
@@ -92,18 +95,18 @@ class Perso {
     }
 
     console.log(OtherP.health);
+    currentP.def = 1;
         
   }
 
   //Lorsque le joueur se défend, il encaisse 50% de dégâts en moins qu’en temps normal
-  defence(currentP, OtherP, p1 ,p2) { 
-    let damages = OtherP.weapon.damage / 2;
-    console.log("d" +OtherP.weapon.damage);
-    currentP.health -= damages;
+  defence(currentP) { 
+    // let damages = OtherP.weapon.damage /2;
+    // console.log("d" +OtherP.weapon.damage);
+    // currentP.health -= damages;
+    currentP.def = 0.5;
+    console.log(currentP.name + " prépare sa défence");
 
-    $("#stats").html('<span>J1</span> : ' + "Arme : "+ p1.weapon.name + "</br>" + " Puissance : " + p1.weapon.damage +"</br>" + " Santé : " + p1.health +"</br>");
-    $("#stats").append('<span>J2</span> : ' + "Arme : "+ p2.weapon.name + "</br>" + " Puissance : " + p2.weapon.damage +"</br>" + " Santé : " + p2.health +"</br>");
-    
   }
  
 }
