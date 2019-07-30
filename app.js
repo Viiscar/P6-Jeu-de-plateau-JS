@@ -11,3 +11,4 @@ $(function() {
 
 // si une arme apparait sur un mur --> bug   --> ok mais dédouble le code
 
+// class wall weapon

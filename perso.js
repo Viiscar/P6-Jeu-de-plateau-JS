@@ -4,9 +4,6 @@ class Perso {
   constructor(name, visual, weapon) {
 
     this.position = Math.floor(Math.random() * 99);
-    // if (this.position < 10) {
-    //   this.position = "0" + this.position;
-    // };
     this.name = name;
     this.health = 150;
     this.weapon = this.weapon0;
@@ -23,25 +20,12 @@ class Perso {
      return this.position;
     
   }
-//                                           ici !!!!!!!!!!!!!!!!!!!!!!!
+
   set pos (valeur) {
-    // if (/^0/.test(this.position)) {
-    //   console.log("not a number");
-    //   this.position = parseInt(this.position);
-    // }
 
     this.position = parseInt(valeur);
-    
-    // if(typeof this.position != "number") {
-    //   this.position = parseInt(this.position);
-    //   console.log("not a number");
-    // }
 
-    // if (this.position < 10) {
-    //   this.position = "0" + this.position; 
-    // }
-
-}
+  }
 
   get swap () {
     return this.swapweapon;
@@ -65,12 +49,6 @@ class Perso {
     }
 
 
-    // Pour que les personnages n'apparaissent pas sur les cases grises
-
-    // if (cell === player.position) {
-    //   player.position = Math.floor(Math.random() * 99);
-    // }
-
   }
 
   // Attaque une cible
@@ -87,8 +65,13 @@ class Perso {
         if (OtherP.health <= 0) {
             
           OtherP.health = 0;
-            console.log("Game over"); //ici mettre un modal 
+            console.log("Game over");
+            $("#inFight").html('<p><img src="'+ OtherP.visual+ '" alt="Perso">Le ' + OtherP.name + "est K.O.");
+            $("#inFight").append('<p><img src="'+ currentP.visual+ '" alt="Perso">Le ' + currentP.name + "a gagné !");
         }
+
+        $("#inFight").html('<p><img src="'+ currentP.visual+ '" alt="Perso"> Le ' + currentP.name + " attaque le " + OtherP.name + '<p><img src="'+ OtherP.visual + "</p>");
+        $("#inFight").append('<p><img src="'+ OtherP.visual+ '" alt="Perso"> Le ' + currentP.name + " perd " + currentP.weapon.damage + " points de vie");
 
         $("#stats").html('<span>J1</span> : ' + "Arme : "+ p1.weapon.name + "</br>" + " Puissance : " + p1.weapon.damage +"</br>" + " Santé : " + p1.health +"</br>");
         $("#stats").append('<span>J2</span> : ' + "Arme : "+ p2.weapon.name + "</br>" + " Puissance : " + p2.weapon.damage +"</br>" + " Santé : " + p2.health +"</br>");
@@ -101,10 +84,10 @@ class Perso {
 
   //Lorsque le joueur se défend, il encaisse 50% de dégâts en moins qu’en temps normal
   defence(currentP) { 
-    // let damages = OtherP.weapon.damage /2;
-    // console.log("d" +OtherP.weapon.damage);
-    // currentP.health -= damages;
     currentP.def = 0.5;
+
+    $("#inFight").html('<p><img src="'+ currentP.visual+ '" alt="Perso"> Le ' + currentP.name + " prépare sa défence");
+
     console.log(currentP.name + " prépare sa défence");
 
   }

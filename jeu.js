@@ -2,7 +2,7 @@ class Jeu {
   constructor() {
       this.grille;
       this.attack = false;
-
+      this.fightTour =0;
     }
 
 
@@ -22,11 +22,13 @@ class Jeu {
     //Création de la grille avec les personnages et les armes
     this.grille = new Grille(10,10, [perso1, perso2], [weapon1, weapon2, weapon3, weapon4]);
 
+    //Création de la grille
     this.grille.createGrille();
 
+    //Création des murs
     this.grille.greyCells();
 
-    //check
+    //check position
     perso1.checkPosition (perso2)
 
     //Insertion des personnages
@@ -43,7 +45,7 @@ class Jeu {
     //Déplacement des personnages
     $(document).keydown(function(e){
 
-
+      //Si on est pas en mode attack
       if (!this.attack){
 
         if (e.which == 39) {//Droite
@@ -77,31 +79,29 @@ class Jeu {
         }
 
       } else {
-
         //Mode Attack
-
-        //fermeture du modal
-        // $('#myModal').modal('hide');
         
         if (e.which == 65) {//Attaquer
           
           this.grille.personnages[0].attack(this.grille.personnages[0], this.grille.personnages[1], perso1, perso2); 
           
         }else if (e.which == 68) {//Défendre
-          //index.defence(index, index2, p1, p2);
+
           this.grille.personnages[0].defence(this.grille.personnages[0], this.grille.personnages[1], perso1, perso2);
-          // console.log(index2.weapon.damages);
+
         }else {
             console.log('Tappez D pour vous défendre ou A pour attaquer');
         }
 
-        this.grille.personnages[0].nbtour = 0; //Le premier attaque 2 fois
+        //Le compteur du joueur en cours tombe à zéro
+        this.grille.personnages[0].nbtour = 0;
 
         }
 
-      //Gestion des tours
+      //Appel de la méthode swapPerso
       this.swapPerso();
-
+      
+      //Appel de la méthode peroMeet
       this.persoMeet (this.grille.personnages[0], this.grille.personnages[1], perso1, perso2);
   
     
@@ -110,8 +110,8 @@ class Jeu {
   
   }
 
-
-  swapPerso() {// comme il est appelé avant le combat ça fausse les tours ?
+  //Changement du personnage en cours
+  swapPerso() {
     
     // console.log("avant if " + persoList[0].name)
     if (this.grille.personnages[0].nbtour === 0) {
@@ -135,7 +135,7 @@ class Jeu {
     
   }
 
-
+  //Si les joueurs se rencontrent un combat se lance
   persoMeet (index, index2, p1, p2) {
 
     if ( index.position -1 === this.grille.personnages[1].position || index.position +1 === this.grille.personnages[1].position || index.position -10 === this.grille.personnages[1].position || index.position +10 === this.grille.personnages[1].position || index.position +9 === this.grille.personnages[1].position || index.position -9 === this.grille.personnages[1].position || index.position +11 === this.grille.personnages[1].position || index.position -11 === this.grille.personnages[1].position ){
@@ -143,16 +143,38 @@ class Jeu {
 
       $("#actions").prepend('<span id = "fight">Fight !<span></br>');
 
-      //il faut gérer le chacun son tour ici et que defense s'active avant attack
+      //                                                                      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      //ouverture du modal qui ne se fermera pas au clic
 
-      //ouverture du modal
-      $('#myModal').modal('show');
+      if (this.fightTour < 2){
+        $('#myModal').modal({backdrop: 'static', keyboard: false});
+        $('#myModal').modal('show');
+      } else {
+        $('#myModal').modal('hide');
+        $("#buttons").append('<button id = "out" type="button" class="btn btn-primary">Fuite</button>')
+        $('#myModal').modal({backdrop: 'static', keyboard: false});
+        $('#myModal').modal('show');
+      }
+
+      $( "#attack" ).click(function(e) {
+        index.attack(index, index2, p1, p2);
+        e.stopPropagation();
+      });
+
+      $( "#defence" ).click(function() {
+        index.defence(index, index2, p1, p2);
+
+      });
+
+      $( "#out" ).click(function() {
+        index.position = Math.floor(Math.random() * 99);
+      });
 
       this.attack = true;
-
-      
-      // console.log(this.swapPerso().name);
-      // Le joueur peut choisir d’attaquer ou de se défendre contre le prochain coup
+      //ici                                                         !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      this.grille.personnages[0].nbtour = 0;
+      this.fightTour +=1;
+      console.log("ft " + this.fightTour);
     
     }
   }
