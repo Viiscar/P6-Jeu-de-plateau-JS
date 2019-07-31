@@ -85,3 +85,10 @@ tr {
     justify-content: space-around;
     align-items: center;
 }
+
+#inModal3
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

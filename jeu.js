@@ -13,7 +13,7 @@ class Jeu {
     let weapon1 = new Weapon("Stalker",'url("weapon1mini.png")', 12);
     let weapon2 = new Weapon("Tracker",'url("weapon2mini.png")', 14);
     let weapon3 = new Weapon("Hunter",'url("weapon3mini.png")', 16);
-    let weapon4 = new Weapon("Exterminator",'url("weapon4.png")', 20);
+    let weapon4 = new Weapon("Exterminator",'url("weapon4mini.png")', 20);
 
     //Création de personages
     let perso1 = new Perso("Joueur 1", 'url("perso1.png")', weapon0);

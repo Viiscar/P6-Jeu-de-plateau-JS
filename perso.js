@@ -56,30 +56,39 @@ class Perso {
     if (OtherP.health > 0) {
       console.log(OtherP.health);
       console.log(OtherP.def);
+
         //Dégats ocasionnés
         let damages = currentP.weapon.damage * OtherP.def;
         OtherP.health -= damages;
 
-        //En cas de mort
-        if (OtherP.health <= 0) {
-            
-          OtherP.health = 0;
-            console.log("Game over");
-            $("#inFight").html('<div id = "inModal2"><div class = "visuOther"></div> Le ' + OtherP.name + "est K.O.</div>");
-            $("#inFight").append('<div id = "inModal2"><div class = "visuCurrent"></div> Le ' + currentP.name + "a gagné !</div>");
-        }
-        // C'est un background image url("weapon0mini.png"),url("perso1.png")
+
         $("#inFight").html('<div id = "inModal1"><div class = "visuCurrent"></div> Le ' + currentP.name + " attaque le " + OtherP.name + '<div class = "visuOther"></div></div>');
         $("#inFight").append('<div id = "inModal2"><div class = "visuOther"></div> Le ' + OtherP.name + " perd " + damages + " points de vie<div></div></div>");
         $(".visuOther").css("background-image", OtherP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
         $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
         $("#click").remove()
+        
+ 
+        //En cas de mort
+        if (OtherP.health <= 0) {
+    
+          OtherP.health = 0;
+          console.log("Game over");
+          $("#inFight").html('<div id = "inModal3"><div class = "visuOther"></div> Le ' + OtherP.name + " est K.O.</div>");
+          $("#inFight").append('<div id = "inModal3"><div class = "visuCurrent"></div> Le ' + currentP.name + " a gagné !</div>");
+          $(".visuOther").css("background-image", OtherP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
+          $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
 
+          //Bouton rejouer
+          // let jeu = new Jeu(Grille, Perso, Weapon);
+          // jeu.init();
+        
+        }
 
-        //C'est le div le probleme
         $("#stats").html('<span>J1</span> : ' + "Arme : "+ p1.weapon.name + "</br>" + " Puissance : " + p1.weapon.damage +"</br>" + " Santé : " + p1.health +"</br>");
         $("#stats").append('<span>J2</span> : ' + "Arme : "+ p2.weapon.name + "</br>" + " Puissance : " + p2.weapon.damage +"</br>" + " Santé : " + p2.health +"</br>");
-    }
+    
+      }
 
     console.log(OtherP.health);
     currentP.def = 1;

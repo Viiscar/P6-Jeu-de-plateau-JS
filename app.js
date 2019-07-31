@@ -5,9 +5,10 @@ $(function() {
 
 });
 
-
+//relancer le jeu à la fin serait cool
+// fuite ça serait cool
 // descativer eventlistner
-// image n'apparait pas
+
 // tour par tour bloqué à cause du listner
 
 // le combat ne se lance pas à chaque fois
