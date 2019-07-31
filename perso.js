@@ -66,13 +66,15 @@ class Perso {
             
           OtherP.health = 0;
             console.log("Game over");
-            $("#inFight").html('<p><img src="'+ OtherP.visual+ '" alt="Perso">Le ' + OtherP.name + "est K.O.");
-            $("#inFight").append('<p><img src="'+ currentP.visual+ '" alt="Perso">Le ' + currentP.name + "a gagné !");
+            $("#inFight").html('<p><img src="'+ OtherP.visual+ '" alt="Autre perso">Le ' + OtherP.name + "est K.O.");
+            $("#inFight").append('<p><img src="'+ currentP.visual+ '" alt="Perso actuel">Le ' + currentP.name + "a gagné !");
         }
+        // C'est un background image url("weapon0mini.png"),url("perso1.png")
+        $("#inFight").html('<p><span class = "visuCurrent"></span> Le ' + currentP.name + " attaque le " + OtherP.name + '<p><img src="'+ OtherP.visual + "</p>");
+        $("#inFight").append('<p><img src="'+ OtherP.visual+ '" alt="Autre Perso"> Le ' + currentP.name + " perd " + currentP.weapon.damage + " points de vie");
+        $(".visuCurrent").css("background-color", "blue");
 
-        $("#inFight").html('<p><img src="'+ currentP.visual+ '" alt="Perso"> Le ' + currentP.name + " attaque le " + OtherP.name + '<p><img src="'+ OtherP.visual + "</p>");
-        $("#inFight").append('<p><img src="'+ OtherP.visual+ '" alt="Perso"> Le ' + currentP.name + " perd " + currentP.weapon.damage + " points de vie");
-
+        //C'est le span le probleme
         $("#stats").html('<span>J1</span> : ' + "Arme : "+ p1.weapon.name + "</br>" + " Puissance : " + p1.weapon.damage +"</br>" + " Santé : " + p1.health +"</br>");
         $("#stats").append('<span>J2</span> : ' + "Arme : "+ p2.weapon.name + "</br>" + " Puissance : " + p2.weapon.damage +"</br>" + " Santé : " + p2.health +"</br>");
     }
@@ -82,11 +84,13 @@ class Perso {
         
   }
 
+  
+  // $(".visuOther").css("background-image", OtherP.visu);
   //Lorsque le joueur se défend, il encaisse 50% de dégâts en moins qu’en temps normal
   defence(currentP) { 
     currentP.def = 0.5;
 
-    $("#inFight").html('<p><img src="'+ currentP.visual+ '" alt="Perso"> Le ' + currentP.name + " prépare sa défence");
+    $("#inFight").html('<p><img src="'+ currentP.visual+ '" alt="Perso actuel"> Le ' + currentP.name + " prépare sa défence");
 
     console.log(currentP.name + " prépare sa défence");
 

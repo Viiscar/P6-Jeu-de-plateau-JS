@@ -76,3 +76,9 @@ tr {
     background-image: url("weapon0min.png"), url("perso2.png");
 
 }
+
+.visuCurrent {
+    height: 80px;
+    width: 62px;
+    background-color: red;
+}

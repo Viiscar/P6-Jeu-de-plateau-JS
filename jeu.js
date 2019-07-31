@@ -156,19 +156,19 @@ class Jeu {
         $('#myModal').modal('show');
       }
 
-      $( "#attack" ).click(function(e) {
-        index.attack(index, index2, p1, p2);
-        e.stopPropagation();
-      });
+      // $( "#attack" ).click(function(e) {
+      //   index.attack(index, index2, p1, p2);
+      //   e.stopPropagation();
+      // });
 
-      $( "#defence" ).click(function() {
-        index.defence(index, index2, p1, p2);
+      // $( "#defence" ).click(function() {
+      //   index.defence(index, index2, p1, p2);
 
-      });
+      // });
 
-      $( "#out" ).click(function() {
-        index.position = Math.floor(Math.random() * 99);
-      });
+      // $( "#out" ).click(function() {
+      //   index.position = Math.floor(Math.random() * 99);
+      // });
 
       this.attack = true;
       //ici                                                         !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

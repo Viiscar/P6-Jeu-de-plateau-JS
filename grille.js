@@ -94,15 +94,11 @@ class Grille {
       for (let j = 0; j < previousCells.length; j++) {
     
         while (previousCells[j] == cell) {
-          if (previousCells[j] == cell){
-          }
           this.weapons[i].position = Math.floor(Math.random() * 99);
           cell = this.weapons[i].position;
         }
 
         while ($("#" + cell).hasClass("wall")) {
-          if ($("#" + cell).hasClass("wall")){
-          }
           this.weapons[i].position = Math.floor(Math.random() * 99);
           cell = this.weapons[i].position;
         }
