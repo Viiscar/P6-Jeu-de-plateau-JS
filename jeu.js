@@ -149,7 +149,7 @@ class Jeu {
       if (this.fightTour < 2){
         $('#myModal').modal({backdrop: 'static', keyboard: false});
         $('#myModal').modal('show');
-      } else {
+      }  else if (this.fightTour === 2){
         $('#myModal').modal('hide');
         $("#buttons").append('<button id = "out" type="button" class="btn btn-primary">Fuite</button>')
         $('#myModal').modal({backdrop: 'static', keyboard: false});

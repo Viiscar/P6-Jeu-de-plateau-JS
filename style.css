@@ -66,19 +66,22 @@ tr {
 
 }
 
-.perso1 {
 
-    background-image: url("weapon0min.png"), url("perso1.png");
-}
-
-.perso2 {
-
-    background-image: url("weapon0min.png"), url("perso2.png");
-
-}
-
-.visuCurrent {
+.visuCurrent, .visuOther{
     height: 80px;
     width: 62px;
-    background-color: red;
+}
+
+#inModal1
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#inModal2
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }

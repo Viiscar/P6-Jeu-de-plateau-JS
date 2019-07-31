@@ -187,13 +187,7 @@ class Grille {
     this.personnages[0].nbtour -= 1;
     
     
-    
-    
   }
-
-
-
-  
 
       
 }

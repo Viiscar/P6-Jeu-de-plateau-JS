@@ -42,12 +42,11 @@ class Perso {
   checkPosition (perso2) {
 
     // Pour que les personnages n'apparaissent pas à coté
-    if (perso2.position === this.position || perso2.position === this.position -1 || perso2.position === this.position +1 || perso2.position === this.position -10 || perso2.position ===this.position +10 || perso2.position === this.position +9 || perso2.position === this.position -9 || perso2.position === this.position +11 || perso2.position === this.position -11) {
+    while (perso2.position === this.position || perso2.position === this.position -1 || perso2.position === this.position +1 || perso2.position === this.position -10 || perso2.position ===this.position +10 || perso2.position === this.position +9 || perso2.position === this.position -9 || perso2.position === this.position +11 || perso2.position === this.position -11) {
       perso2.position = Math.floor(Math.random() * 99);
       // playerPosition(perso2);
       
     }
-
 
   }
 
@@ -66,15 +65,18 @@ class Perso {
             
           OtherP.health = 0;
             console.log("Game over");
-            $("#inFight").html('<p><img src="'+ OtherP.visual+ '" alt="Autre perso">Le ' + OtherP.name + "est K.O.");
-            $("#inFight").append('<p><img src="'+ currentP.visual+ '" alt="Perso actuel">Le ' + currentP.name + "a gagné !");
+            $("#inFight").html('<div id = "inModal2"><div class = "visuOther"></div> Le ' + OtherP.name + "est K.O.</div>");
+            $("#inFight").append('<div id = "inModal2"><div class = "visuCurrent"></div> Le ' + currentP.name + "a gagné !</div>");
         }
         // C'est un background image url("weapon0mini.png"),url("perso1.png")
-        $("#inFight").html('<p><span class = "visuCurrent"></span> Le ' + currentP.name + " attaque le " + OtherP.name + '<p><img src="'+ OtherP.visual + "</p>");
-        $("#inFight").append('<p><img src="'+ OtherP.visual+ '" alt="Autre Perso"> Le ' + currentP.name + " perd " + currentP.weapon.damage + " points de vie");
-        $(".visuCurrent").css("background-color", "blue");
+        $("#inFight").html('<div id = "inModal1"><div class = "visuCurrent"></div> Le ' + currentP.name + " attaque le " + OtherP.name + '<div class = "visuOther"></div></div>');
+        $("#inFight").append('<div id = "inModal2"><div class = "visuOther"></div> Le ' + OtherP.name + " perd " + damages + " points de vie<div></div></div>");
+        $(".visuOther").css("background-image", OtherP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
+        $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
+        $("#click").remove()
 
-        //C'est le span le probleme
+
+        //C'est le div le probleme
         $("#stats").html('<span>J1</span> : ' + "Arme : "+ p1.weapon.name + "</br>" + " Puissance : " + p1.weapon.damage +"</br>" + " Santé : " + p1.health +"</br>");
         $("#stats").append('<span>J2</span> : ' + "Arme : "+ p2.weapon.name + "</br>" + " Puissance : " + p2.weapon.damage +"</br>" + " Santé : " + p2.health +"</br>");
     }
@@ -90,8 +92,9 @@ class Perso {
   defence(currentP) { 
     currentP.def = 0.5;
 
-    $("#inFight").html('<p><img src="'+ currentP.visual+ '" alt="Perso actuel"> Le ' + currentP.name + " prépare sa défence");
-
+    $("#inFight").html('<div id = "inModal2"><div class = "visuCurrent"></div> Le ' + currentP.name + " prépare sa défence<div>");
+    $(".visuCurrent").css("background-image", currentP.visu);
+    $("#click").remove()
     console.log(currentP.name + " prépare sa défence");
 
   }
