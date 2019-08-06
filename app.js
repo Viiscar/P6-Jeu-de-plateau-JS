@@ -6,8 +6,8 @@ $(function() {
 });
 
 //relancer le jeu à la fin serait cool
-// fuite ça serait cool
-// descativer eventlistner
+
+// une fois que le personnages est KO empécher les touches
 
 // tour par tour bloqué à cause du listner
 

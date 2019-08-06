@@ -80,9 +80,12 @@ class Perso {
           $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
 
           //Bouton rejouer
-          // let jeu = new Jeu(Grille, Perso, Weapon);
-          // jeu.init();
-        
+          $(document).keydown(function(e){
+            if (e.which == 82) {//R
+              let jeu = new Jeu(Grille, Perso, Weapon);
+              jeu.init();
+            }
+          })
         }
 
         $("#stats").html('<span>J1</span> : ' + "Arme : "+ p1.weapon.name + "</br>" + " Puissance : " + p1.weapon.damage +"</br>" + " Santé : " + p1.health +"</br>");
@@ -95,14 +98,12 @@ class Perso {
         
   }
 
-  
-  // $(".visuOther").css("background-image", OtherP.visu);
   //Lorsque le joueur se défend, il encaisse 50% de dégâts en moins qu’en temps normal
   defence(currentP) { 
     currentP.def = 0.5;
 
     $("#inFight").html('<div id = "inModal2"><div class = "visuCurrent"></div> Le ' + currentP.name + " prépare sa défence<div>");
-    $(".visuCurrent").css("background-image", currentP.visu);
+    $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");;
     $("#click").remove()
     console.log(currentP.name + " prépare sa défence");
 

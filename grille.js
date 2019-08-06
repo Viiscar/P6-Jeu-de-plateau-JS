@@ -81,7 +81,7 @@ class Grille {
 
 
   }
-
+  //insertion des armes
   insertWeapons () {
 
     let previousCells = [];
@@ -93,15 +93,12 @@ class Grille {
 
       for (let j = 0; j < previousCells.length; j++) {
     
-        while (previousCells[j] == cell) {
+        while (previousCells[j] === cell || $("#" + cell).hasClass("wall")){
+          console.log("ici");
           this.weapons[i].position = Math.floor(Math.random() * 99);
           cell = this.weapons[i].position;
         }
 
-        while ($("#" + cell).hasClass("wall")) {
-          this.weapons[i].position = Math.floor(Math.random() * 99);
-          cell = this.weapons[i].position;
-        }
       }
 
       previousCells[i] = cell;
@@ -117,26 +114,22 @@ class Grille {
 
 
   }
-
+  //changement d'arme
   swapWeapon (index, weapon, perso, p1, p2) {
-    
-    let previousWeapon = perso.weapon;
-    perso.swapweapon = previousWeapon;
-    
-    
-    perso.weapon = weapon;
 
+    this.weapons.splice(this.weapons.indexOf(weapon), 1, perso.weapon);
+    $("#" + index).data("data-weapon", this.weapons.indexOf(perso.weapon));
+    console.log(this);
+
+    perso.swapweapon = perso.weapon;
+
+    perso.weapon = weapon;
     
     $("#" + index).css("background-image", perso.visu);
-    
-
-
 
     $("#actions").prepend('<div id = "changeW">Le ' + perso.name + " à récupéré l'arme " + weapon.name + ".</br></div>");
     $("#stats").html('<span>J1</span> : ' + "Arme : "+ p1.weapon.name + "</br>" + " Puissance : " + p1.weapon.damage +"</br>" + " Santé : " + p1.health +"</br>");
     $("#stats").append('<span>J2</span> : ' + "Arme : "+ p2.weapon.name + "</br>" + " Puissance : " + p2.weapon.damage +"</br>" + " Santé : " + p2.health +"</br>");
-
-
 
   }
 
@@ -151,23 +144,20 @@ class Grille {
       perso.weapon.position = index;
     }
 
-    
-                                                    
     if (perso.swapweapon != 0){
 
-      
       $("#" + perso.swapweapon.position).css("background-image", perso.swapweapon.visual);
       perso.swapweapon = 0;
       
+      
     }
-    let selectedWeapon = $("#" + perso.pos).data("data-weapon");
-
+                                                    
 
     if(typeof $("#" + perso.pos).data("data-weapon") != "undefined") {
+      let selectedWeapon = $("#" + perso.pos).data("data-weapon");// ici !!!!!!
 
       this.swapWeapon(perso.pos, this.weapons[selectedWeapon], perso, p1, p2);
       
-
     }
 
     //si le personage sort du cadre

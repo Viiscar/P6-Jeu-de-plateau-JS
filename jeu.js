@@ -78,6 +78,20 @@ class Jeu {
           
         }
 
+        //Test Fuite
+        if (e.which == 82) { //R
+          $("#" + parseInt(this.grille.personnages[0].pos)).removeAttr("style");
+          let previousPosition = this.grille.personnages[0].position;
+          this.grille.personnages[0].position = Math.floor(Math.random() * 99);
+
+          while ($("#"+this.grille.personnages[0].position).hasClass("wall") || $("#"+this.grille.personnages[0].position).hasClass("weapon") || this.grille.personnages[0].position == this.grille.personnages[1].position || this.grille.personnages[0].position == previousPosition){
+            this.grille.personnages[0].position = Math.floor(Math.random() * 99);
+          }
+          //mettre image ici
+          $("#"+this.grille.personnages[0].position).css("background-image", this.grille.personnages[0].visu);
+
+        };
+
       } else {
         //Mode Attack
         
@@ -167,7 +181,17 @@ class Jeu {
       // });
 
       // $( "#out" ).click(function() {
-      //   index.position = Math.floor(Math.random() * 99);
+        //  $("#" + parseInt(index.pos)).removeAttr("style");
+        // let previousPosition = this.grille.personnages[0].position;
+        // index.position = Math.floor(Math.random() * 99);
+
+        // while ($("#"+index.position).hasClass("wall") || $("#"+index.position).hasClass("weapon") || index.position == index2.position || index.position == previousPosition){
+        //   index.position = Math.floor(Math.random() * 99);
+        // }
+    
+
+        //$("#"+index.position).css("background-image", index.visu);
+
       // });
 
       this.attack = true;
