@@ -76,14 +76,14 @@ class Perso {
           console.log("Game over");
           $("#inFight").html('<div id = "inModal3"><div class = "visuOther"></div> Le ' + OtherP.name + " est K.O.</div>");
           $("#inFight").append('<div id = "inModal3"><div class = "visuCurrent"></div> Le ' + currentP.name + " a gagné !</div>");
+          $("#inFight").append('<div>Appuyer sur la touche "R" pour rejouer.</div>');
           $(".visuOther").css("background-image", OtherP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
           $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
 
           //Bouton rejouer
           $(document).keydown(function(e){
             if (e.which == 82) {//R
-              let jeu = new Jeu(Grille, Perso, Weapon);
-              jeu.init();
+              location.reload();
             }
           })
         }

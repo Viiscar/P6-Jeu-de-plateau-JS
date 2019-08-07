@@ -78,19 +78,7 @@ class Jeu {
           
         }
 
-        //Test Fuite
-        if (e.which == 82) { //R
-          $("#" + parseInt(this.grille.personnages[0].pos)).removeAttr("style");
-          let previousPosition = this.grille.personnages[0].position;
-          this.grille.personnages[0].position = Math.floor(Math.random() * 99);
 
-          while ($("#"+this.grille.personnages[0].position).hasClass("wall") || $("#"+this.grille.personnages[0].position).hasClass("weapon") || this.grille.personnages[0].position == this.grille.personnages[1].position || this.grille.personnages[0].position == previousPosition){
-            this.grille.personnages[0].position = Math.floor(Math.random() * 99);
-          }
-          //mettre image ici
-          $("#"+this.grille.personnages[0].position).css("background-image", this.grille.personnages[0].visu);
-
-        };
 
       } else {
         //Mode Attack
@@ -116,7 +104,7 @@ class Jeu {
       this.swapPerso();
       
       //Appel de la méthode peroMeet
-      this.persoMeet (this.grille.personnages[0], this.grille.personnages[1], perso1, perso2);
+      this.persoMeet (this.grille.personnages[0], this.grille.personnages[1]);
   
     
     }.bind(this));
@@ -127,21 +115,15 @@ class Jeu {
   //Changement du personnage en cours
   swapPerso() {
     
-    // console.log("avant if " + persoList[0].name)
     if (this.grille.personnages[0].nbtour === 0) {
 
       this.grille.personnages[0].nbtour = 3;
-
-      // console.log("apres if");
-
       
       let temp = this.grille.personnages[0];
     
       this.grille.personnages[0] = this.grille.personnages[1];
       this.grille.personnages[1] = temp;
 
-      // console.log(persoList[0].name);
-      // this.grille.personnages[0] = persoList[0]
       $("#actions").prepend('<div id = "changeP" >Au tour du ' + this.grille.personnages[0].name + "</br></div>");
 
     }
@@ -150,55 +132,58 @@ class Jeu {
   }
 
   //Si les joueurs se rencontrent un combat se lance
-  persoMeet (index, index2, p1, p2) {
+  persoMeet (index, index2) {
 
     if ( index.position -1 === this.grille.personnages[1].position || index.position +1 === this.grille.personnages[1].position || index.position -10 === this.grille.personnages[1].position || index.position +10 === this.grille.personnages[1].position || index.position +9 === this.grille.personnages[1].position || index.position -9 === this.grille.personnages[1].position || index.position +11 === this.grille.personnages[1].position || index.position -11 === this.grille.personnages[1].position ){
+      this.attack = true;
+      
       console.log("Fight ! Tappez D pour vous défendre ou A pour attaquer"); // mettre un son et a insérer dans le dom
-
+      
       $("#actions").prepend('<span id = "fight">Fight !<span></br>');
 
-      //                                                                      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       //ouverture du modal qui ne se fermera pas au clic
 
       if (this.fightTour < 2){
         $('#myModal').modal({backdrop: 'static', keyboard: false});
         $('#myModal').modal('show');
-      }  else if (this.fightTour === 2){
-        $('#myModal').modal('hide');
-        $("#buttons").append('<button id = "out" type="button" class="btn btn-primary">Fuite</button>')
-        $('#myModal').modal({backdrop: 'static', keyboard: false});
-        $('#myModal').modal('show');
-      }
 
-      // $( "#attack" ).click(function(e) {
-      //   index.attack(index, index2, p1, p2);
-      //   e.stopPropagation();
-      // });
 
-      // $( "#defence" ).click(function() {
-      //   index.defence(index, index2, p1, p2);
-
-      // });
-
-      // $( "#out" ).click(function() {
-        //  $("#" + parseInt(index.pos)).removeAttr("style");
-        // let previousPosition = this.grille.personnages[0].position;
-        // index.position = Math.floor(Math.random() * 99);
-
-        // while ($("#"+index.position).hasClass("wall") || $("#"+index.position).hasClass("weapon") || index.position == index2.position || index.position == previousPosition){
-        //   index.position = Math.floor(Math.random() * 99);
-        // }
-    
-
-        //$("#"+index.position).css("background-image", index.visu);
-
-      // });
-
-      this.attack = true;
-      //ici                                                         !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       this.grille.personnages[0].nbtour = 0;
       this.fightTour +=1;
-      console.log("ft " + this.fightTour);
+      }  else if (this.fightTour === 2){
+        $('#myModal').modal('hide');
+        $("#buttons").append('<p id = "click">Tappez sur "A" pour attaquer ou sur "D" pour préparer votre défence ou sur "F" pour fuir</p>')
+        $('#myModal').modal({backdrop: 'static', keyboard: false});
+        $('#myModal').modal('show');
+
+      this.grille.personnages[0].nbtour = 0;
+      this.fightTour +=1;
+
+        $(document).keydown(function(e){
+          //Fuite
+          if (e.which == 70) { //F
+            $('#myModal').modal('hide');
+            $("#" + parseInt(index.pos)).removeAttr("style");
+            let previousPosition = index.position;
+            index.position = Math.floor(Math.random() * 99);
+  
+            while ($("#"+index.position).hasClass("wall") || $("#"+index.position).hasClass("weapon") || index.position == index2.position || index.position == previousPosition){
+              index.position = Math.floor(Math.random() * 99);
+            }
+            //mettre image ici
+            $("#"+index.position).css("background-image", index.visu);
+
+            // maintenant il ne reste plus qu'a sortir du mode fight
+            this.attack = false
+            this.fightTour =0
+            index.nbtour = 0;
+  
+          };
+        });
+      }
+      console.log(this.attack); //has to be false
+      console.log(this.fightTour);// has to be 0
+      console.log(this.grille.personnages[0].nbtour);//has to be 0
     
     }
   }
