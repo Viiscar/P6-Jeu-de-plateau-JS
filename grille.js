@@ -94,7 +94,6 @@ class Grille {
       for (let j = 0; j < previousCells.length; j++) {
     
         while (previousCells[j] === cell || $("#" + cell).hasClass("wall")){
-          console.log("ici");
           this.weapons[i].position = Math.floor(Math.random() * 99);
           cell = this.weapons[i].position;
         }
@@ -119,7 +118,6 @@ class Grille {
 
     this.weapons.splice(this.weapons.indexOf(weapon), 1, perso.weapon);
     $("#" + index).data("data-weapon", this.weapons.indexOf(perso.weapon));
-    console.log(this);
 
     perso.swapweapon = perso.weapon;
 

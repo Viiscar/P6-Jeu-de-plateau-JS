@@ -38,12 +38,16 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header bg-danger text-white">
-            <h4 class="modal-title">Fight !!!</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title text-center">Fight !</h4>
           </div>
           <div id= "buttons" class="modal-body text-center">
             <div id="inFight"></div>
-            <p id = "click">Tappez sur "A" pour attaquer ou sur "D" pour préparer votre défence</p>
+            <div id = "fightInstructions">
+                <p>Tappez sur:</p>
+                <button id = "attack" type="button" class="btn btn-danger">"A" pour attaquer</button>
+                <button id = "attack" type="button" class="btn btn-success">"D" pour préparer votre défense</button>
+            </div>
+            
             <!-- <button id = "attack" type="button" class="btn btn-danger">Attack</button>
             <button id = "defence" type="button" class="btn btn-success">Defence</button> -->
           </div>

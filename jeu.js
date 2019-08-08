@@ -1,9 +1,22 @@
 class Jeu {
   constructor() {
       this.grille;
+      this.gameOver= false;
       this.attack = false;
       this.fightTour =0;
     }
+
+    get over () {
+  
+      return this.gameOver;
+     
+   }
+ 
+   set over (valeur) {
+ 
+    this.gameOver = (valeur);
+ 
+   }
 
 
   init() {
@@ -42,8 +55,14 @@ class Jeu {
     $("#stats").append('<span>J1</span> : ' + "Arme : "+ perso1.weapon.name + "</br>" + " Puissance : " + perso1.weapon.damage + "</br>" + " Santé : " + perso1.health +"</br>");
     $("#stats").append('<span>J2</span> : ' + "Arme : "+ perso2.weapon.name + "</br>" + " Puissance : " + perso2.weapon.damage +"</br>" + " Santé : " + perso1.health +"</br>");
 
+
     //Déplacement des personnages
     $(document).keydown(function(e){
+
+    //Gestion de la fin du jeu
+    if (this.grille.personnages[0].health === 0){
+      this.over = true;
+    }
 
       //Si on est pas en mode attack
       if (!this.attack){
@@ -79,8 +98,7 @@ class Jeu {
         }
 
 
-
-      } else {
+      } else if (this.attack && !this.gameOver) {
         //Mode Attack
         
         if (e.which == 65) {//Attaquer
@@ -91,8 +109,34 @@ class Jeu {
 
           this.grille.personnages[0].defence(this.grille.personnages[0], this.grille.personnages[1], perso1, perso2);
 
-        }else {
-            console.log('Tappez D pour vous défendre ou A pour attaquer');
+        }else if (this.fightTour > 2){
+          if (e.which == 70) { //F
+            $("#inModal1").remove();
+            $("#inModal2").remove();
+            $('#myModal').modal('hide');
+            $("#" + parseInt(this.grille.personnages[0].pos)).removeAttr("style");
+            let previousPosition = this.grille.personnages[0].position;
+            this.grille.personnages[0].position = Math.floor(Math.random() * 99);
+  
+            while ($("#"+this.grille.personnages[0].pos).hasClass("wall") || $("#"+this.grille.personnages[0].position).hasClass("weapon") || this.grille.personnages[0].position == this.grille.personnages[1].position || this.grille.personnages[0].position == previousPosition){
+              this.grille.personnages[0].position = Math.floor(Math.random() * 99);
+            }
+            //mettre image ici
+            $("#"+this.grille.personnages[0].pos).css("background-image", this.grille.personnages[0].visu);
+
+            //On retire l'option fuite de la modal
+            $("#fightInstructions").html('<div class="modal-footer">');
+            $("#fightInstructions").append('<p>Tappez sur:</p>');
+            $("#fightInstructions").append('<button type="button" class="btn btn-danger">"A" pour attaquer</button>');
+            $("#fightInstructions").append('<button  type="button" class="btn btn-success">"D" pour préparer votre défense</button>');
+
+            // maintenant il ne reste plus qu'a sortir du mode fight
+            this.attack = false
+            this.fightTour =0
+            this.grille.personnages[0].nbtour = 0;
+  
+          };
+
         }
 
         //Le compteur du joueur en cours tombe à zéro
@@ -137,8 +181,6 @@ class Jeu {
     if ( index.position -1 === this.grille.personnages[1].position || index.position +1 === this.grille.personnages[1].position || index.position -10 === this.grille.personnages[1].position || index.position +10 === this.grille.personnages[1].position || index.position +9 === this.grille.personnages[1].position || index.position -9 === this.grille.personnages[1].position || index.position +11 === this.grille.personnages[1].position || index.position -11 === this.grille.personnages[1].position ){
       this.attack = true;
       
-      console.log("Fight ! Tappez D pour vous défendre ou A pour attaquer"); // mettre un son et a insérer dans le dom
-      
       $("#actions").prepend('<span id = "fight">Fight !<span></br>');
 
       //ouverture du modal qui ne se fermera pas au clic
@@ -147,44 +189,28 @@ class Jeu {
         $('#myModal').modal({backdrop: 'static', keyboard: false});
         $('#myModal').modal('show');
 
-
-      this.grille.personnages[0].nbtour = 0;
-      this.fightTour +=1;
       }  else if (this.fightTour === 2){
         $('#myModal').modal('hide');
-        $("#buttons").append('<p id = "click">Tappez sur "A" pour attaquer ou sur "D" pour préparer votre défence ou sur "F" pour fuir</p>')
+
+        $("#fightInstructions").html('<div class="modal-footer">');
+        $("#fightInstructions").append('<p>Tappez sur:</p>');
+        $("#fightInstructions").append('<button type="button" class="btn btn-danger">"A" pour attaquer</button>');
+        $("#fightInstructions").append('<button  type="button" class="btn btn-success">"D" pour préparer votre défense</button>');
+        $("#fightInstructions").append('<button  type="button" class="btn btn-primary"> "F" pour fuir</button>');
         $('#myModal').modal({backdrop: 'static', keyboard: false});
         $('#myModal').modal('show');
 
+      }
+
       this.grille.personnages[0].nbtour = 0;
       this.fightTour +=1;
 
-        $(document).keydown(function(e){
-          //Fuite
-          if (e.which == 70) { //F
-            $('#myModal').modal('hide');
-            $("#" + parseInt(index.pos)).removeAttr("style");
-            let previousPosition = index.position;
-            index.position = Math.floor(Math.random() * 99);
-  
-            while ($("#"+index.position).hasClass("wall") || $("#"+index.position).hasClass("weapon") || index.position == index2.position || index.position == previousPosition){
-              index.position = Math.floor(Math.random() * 99);
-            }
-            //mettre image ici
-            $("#"+index.position).css("background-image", index.visu);
-
-            // maintenant il ne reste plus qu'a sortir du mode fight
-            this.attack = false
-            this.fightTour =0
-            index.nbtour = 0;
-  
-          };
-        });
+      if (this.fightTour === 1){
+        $("#fightInstructions").html('<div class="modal-footer">');
+        $("#fightInstructions").append('<p>Tappez sur:</p>');
+        $("#fightInstructions").append('<button type="button" class="btn btn-danger">"A" pour attaquer</button>');
+        $("#fightInstructions").append('<button  type="button" class="btn btn-success">"D" pour préparer votre défense</button>');
       }
-      console.log(this.attack); //has to be false
-      console.log(this.fightTour);// has to be 0
-      console.log(this.grille.personnages[0].nbtour);//has to be 0
-    
     }
   }
 };

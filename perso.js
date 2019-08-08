@@ -52,10 +52,8 @@ class Perso {
 
   // Attaque une cible
   attack(currentP, OtherP, p1 ,p2) {
-    // console.log(OtherP.name);
+
     if (OtherP.health > 0) {
-      console.log(OtherP.health);
-      console.log(OtherP.def);
 
         //Dégats ocasionnés
         let damages = currentP.weapon.damage * OtherP.def;
@@ -66,17 +64,18 @@ class Perso {
         $("#inFight").append('<div id = "inModal2"><div class = "visuOther"></div> Le ' + OtherP.name + " perd " + damages + " points de vie<div></div></div>");
         $(".visuOther").css("background-image", OtherP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
         $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
-        $("#click").remove()
         
- 
         //En cas de mort
         if (OtherP.health <= 0) {
     
           OtherP.health = 0;
-          console.log("Game over");
+          console.log("Game over")
           $("#inFight").html('<div id = "inModal3"><div class = "visuOther"></div> Le ' + OtherP.name + " est K.O.</div>");
           $("#inFight").append('<div id = "inModal3"><div class = "visuCurrent"></div> Le ' + currentP.name + " a gagné !</div>");
-          $("#inFight").append('<div>Appuyer sur la touche "R" pour rejouer.</div>');
+          $("#fightInstructions").remove();
+          $("#inFight").append('<div class="modal-footer">');
+          $("#inFight").append('<p>Tappez sur:</p>');     
+          $("#inFight").append('<button type="button" class="btn btn-danger">"R" pour rejouer</button>');
           $(".visuOther").css("background-image", OtherP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
           $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
 
@@ -93,7 +92,6 @@ class Perso {
     
       }
 
-    console.log(OtherP.health);
     currentP.def = 1;
         
   }
@@ -104,8 +102,6 @@ class Perso {
 
     $("#inFight").html('<div id = "inModal2"><div class = "visuCurrent"></div> Le ' + currentP.name + " prépare sa défence<div>");
     $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");;
-    $("#click").remove()
-    console.log(currentP.name + " prépare sa défence");
 
   }
  
@@ -120,7 +116,5 @@ class Weapon {
     this.damage = damage;
   }
 }
-
-
 
 
