@@ -47,14 +47,16 @@ table {
     font-weight: bold;
 }
 
+#runaway{
+    color: rgb(19, 172, 70);
+    font-weight: bold;
+}
 tr {
 
     justify-content: space-around;
 }
 
 td {
-    /* width: 4.5em;
-    height: 5.3em; */
     border-left: 1px solid black;
     border-right: 1px solid black;
     background-position: left center, center center;
@@ -63,7 +65,6 @@ td {
 
 tr {
     border: 1px solid black;
-
 }
 
 
@@ -105,4 +106,39 @@ tr {
 
 .btn {
     margin: 0.25em;
+}
+
+@font-face { 
+    font-family: "Fighting Force"; 
+    src: url("Fonts/FIGHTT3.ttf");
+    font-weight: bold; 
+}
+
+@font-face { 
+    font-family: "Fstrikefighter"; 
+    src: url("Fonts/strikefighter.ttf");
+    font-weight: bold; 
+}
+
+@font-face { 
+    font-family: "Fstrikefightergradital"; 
+    src: url("Fonts/strikefighterhalfital.ttf");
+    font-weight: bold; 
+}
+
+
+
+#modal-title {
+    font-family: Fstrikefightergradital;
+    font-size: 3rem;
+}
+
+#tapper, .actionFight{
+    font-family: Fighting Force;
+    font-size: 2rem;
+}
+
+.btn{
+    font-family: Fstrikefighter;
+    font-size: 0.9rem;
 }

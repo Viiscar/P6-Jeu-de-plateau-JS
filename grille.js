@@ -57,32 +57,9 @@ class Grille {
     $("#plateau").append(table);
 
   }
-  
-  // placement de joueur aleatoire
 
-  insertPlayers () {
-    
-    for (let i = 0; i < this.personnages.length; i++ ) {
-      
-      //Si le personnage apparait sur un mur
-      if ($(".perso").hasClass("wall")){
-        this.personnages[i].position = Math.floor(Math.random() * 99);
-      }
-      //Si le personnage apparait sur une arme
-      if ($(".perso").hasClass("weapon")){
-        this.personnages[i].position = Math.floor(Math.random() * 99);
-      }
-      
-      $("#" + this.personnages[i].position).css("background-image", this.personnages[i].visu);
-    
-      
-      
-    }
-
-
-  }
-  //insertion des armes
-  insertWeapons () {
+   //insertion des armes
+   insertWeapons () {
 
     let previousCells = [];
 
@@ -107,12 +84,32 @@ class Grille {
       $("#" + cell).addClass("weapon");  
       $("#" + cell).data("data-weapon", i);
       $("#" + cell).css("background-image", this.weapons[i].visual);
+      
+    }
 
+  }
+  
+  // placement de joueur aleatoire
+
+  insertPlayers () {
+    
+    for (let i = 0; i < this.personnages.length; i++ ) {
+
+
+      while($("#" + this.personnages[i].position).hasClass("wall") || $("#" + this.personnages[i].position).data("data-weapon")) { //le personnage apparait sur une arme
+        this.personnages[i].position = Math.floor(Math.random() * 99);
+        console.log("oui");
+      }
+      
+      $("#" + this.personnages[i].position).css("background-image", this.personnages[i].visu);
+    
+      console.log(this.personnages[i].position);
       
     }
 
 
   }
+ 
   //changement d'arme
   swapWeapon (index, weapon, perso, p1, p2) {
 

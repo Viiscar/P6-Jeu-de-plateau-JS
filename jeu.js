@@ -121,12 +121,14 @@ class Jeu {
             while ($("#"+this.grille.personnages[0].pos).hasClass("wall") || $("#"+this.grille.personnages[0].position).hasClass("weapon") || this.grille.personnages[0].position == this.grille.personnages[1].position || this.grille.personnages[0].position == previousPosition){
               this.grille.personnages[0].position = Math.floor(Math.random() * 99);
             }
+
+            $("#actions").prepend('<span id = "runaway">Le ' + this.grille.personnages[0].name + ' s\'est enfui<span></br>');
             //mettre image ici
             $("#"+this.grille.personnages[0].pos).css("background-image", this.grille.personnages[0].visu);
 
-            //On retire l'option fuite de la modal
+            //On retire l'option fuite du modal
             $("#fightInstructions").html('<div class="modal-footer">');
-            $("#fightInstructions").append('<p>Tappez sur:</p>');
+            $("#fightInstructions").append('<p id = "tapper">Tappez sur:</p>');
             $("#fightInstructions").append('<button type="button" class="btn btn-danger">"A" pour attaquer</button>');
             $("#fightInstructions").append('<button  type="button" class="btn btn-success">"D" pour préparer votre défense</button>');
 
@@ -167,8 +169,9 @@ class Jeu {
     
       this.grille.personnages[0] = this.grille.personnages[1];
       this.grille.personnages[1] = temp;
-
-      $("#actions").prepend('<div id = "changeP" >Au tour du ' + this.grille.personnages[0].name + "</br></div>");
+      if (!this.attack){
+        $("#actions").prepend('<div id = "changeP" >Au tour du ' + this.grille.personnages[0].name + "</br></div>");
+      }
 
     }
     
@@ -176,13 +179,16 @@ class Jeu {
   }
 
   //Si les joueurs se rencontrent un combat se lance
-  persoMeet (index, index2) {
+  persoMeet (index) {
 
     if ( index.position -1 === this.grille.personnages[1].position || index.position +1 === this.grille.personnages[1].position || index.position -10 === this.grille.personnages[1].position || index.position +10 === this.grille.personnages[1].position || index.position +9 === this.grille.personnages[1].position || index.position -9 === this.grille.personnages[1].position || index.position +11 === this.grille.personnages[1].position || index.position -11 === this.grille.personnages[1].position ){
       this.attack = true;
-      
-      $("#actions").prepend('<span id = "fight">Fight !<span></br>');
 
+      if (this.fightTour === 1){
+        $("#actions").prepend('<span id = "fight">Fight !<span></br>');
+
+      }
+      
       //ouverture du modal qui ne se fermera pas au clic
 
       if (this.fightTour < 2){
@@ -193,7 +199,7 @@ class Jeu {
         $('#myModal').modal('hide');
 
         $("#fightInstructions").html('<div class="modal-footer">');
-        $("#fightInstructions").append('<p>Tappez sur:</p>');
+        $("#fightInstructions").append('<p id = "tapper">Tappez sur:</p>');
         $("#fightInstructions").append('<button type="button" class="btn btn-danger">"A" pour attaquer</button>');
         $("#fightInstructions").append('<button  type="button" class="btn btn-success">"D" pour préparer votre défense</button>');
         $("#fightInstructions").append('<button  type="button" class="btn btn-primary"> "F" pour fuir</button>');
@@ -204,10 +210,11 @@ class Jeu {
 
       this.grille.personnages[0].nbtour = 0;
       this.fightTour +=1;
+      console.log(this.fightTour);
 
       if (this.fightTour === 1){
         $("#fightInstructions").html('<div class="modal-footer">');
-        $("#fightInstructions").append('<p>Tappez sur:</p>');
+        $("#fightInstructions").append('<p id = "tapper">Tappez sur:</p>');
         $("#fightInstructions").append('<button type="button" class="btn btn-danger">"A" pour attaquer</button>');
         $("#fightInstructions").append('<button  type="button" class="btn btn-success">"D" pour préparer votre défense</button>');
       }

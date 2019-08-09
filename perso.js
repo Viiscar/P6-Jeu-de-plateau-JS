@@ -60,8 +60,8 @@ class Perso {
         OtherP.health -= damages;
 
 
-        $("#inFight").html('<div id = "inModal1"><div class = "visuCurrent"></div> Le ' + currentP.name + " attaque le " + OtherP.name + '<div class = "visuOther"></div></div>');
-        $("#inFight").append('<div id = "inModal2"><div class = "visuOther"></div> Le ' + OtherP.name + " perd " + damages + " points de vie<div></div></div>");
+        $("#inFight").html('<div class = "actionFight" id = "inModal1"><div class = "visuCurrent"></div> Le ' + currentP.name + " attaque le " + OtherP.name + '<div class = "visuOther"></div></div>');
+        $("#inFight").append('<div class = "actionFight" id = "inModal2"><div class = "visuOther"></div> Le ' + OtherP.name + " perd " + damages + " points de vie<div></div></div>");
         $(".visuOther").css("background-image", OtherP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
         $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
         
@@ -70,12 +70,13 @@ class Perso {
     
           OtherP.health = 0;
           console.log("Game over")
-          $("#inFight").html('<div id = "inModal3"><div class = "visuOther"></div> Le ' + OtherP.name + " est K.O.</div>");
-          $("#inFight").append('<div id = "inModal3"><div class = "visuCurrent"></div> Le ' + currentP.name + " a gagné !</div>");
+          $("#modal-title").html('<h4 id = "modal-title" class="modal-title text-center">Game Over</h4');
+          $("#inFight").html('<div class = "actionFight" id = "inModal3"><div class = "visuOther"></div> Le ' + OtherP.name + " est K.O.</div>");
+          $("#inFight").append('<div class = "actionFight" id = "inModal3"><div class = "visuCurrent"></div> Le ' + currentP.name + " a gagné !</div>");
           $("#fightInstructions").remove();
           $("#inFight").append('<div class="modal-footer">');
-          $("#inFight").append('<p>Tappez sur:</p>');     
-          $("#inFight").append('<button type="button" class="btn btn-danger">"R" pour rejouer</button>');
+          $("#inFight").append('<p id = "tapper">Tappez sur:</p>');     
+          $("#inFight").append('<button type="button" class="btn btn-success">"R" pour rejouer</button>');
           $(".visuOther").css("background-image", OtherP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
           $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");
 
@@ -100,7 +101,7 @@ class Perso {
   defence(currentP) { 
     currentP.def = 0.5;
 
-    $("#inFight").html('<div id = "inModal2"><div class = "visuCurrent"></div> Le ' + currentP.name + " prépare sa défence<div>");
+    $("#inFight").html('<div class = "actionFight" id = "inModal2"><div class = "visuCurrent"></div> Le ' + currentP.name + " prépare sa défence<div>");
     $(".visuCurrent").css("background-image", currentP.visu).css("background-repeat", "no-repeat").css("background-position", "left -70% bottom 50%");;
 
   }

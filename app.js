@@ -5,10 +5,6 @@ $(function() {
 
 });
 
-// mettre la fuite au bon endroit
+// lorsqu'un perso est sur une arme. Dès que l'autre perso bouge, l'image du premier perso disparait, laissant uniquement son arme.
 
-// une fois que le personnages est KO empécher les touches
-
-// le combat ne se lance pas à chaque fois
-
-// class wall weapon
+// le personnage apparait sur les armes
