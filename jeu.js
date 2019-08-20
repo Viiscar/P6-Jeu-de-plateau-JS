@@ -44,12 +44,11 @@ class Jeu {
     //check position
     perso1.checkPosition (perso2)
 
-    //Insertion des personnages
-    this.grille.insertPlayers();
-
-
     //Insertion des armes    
     this.grille.insertWeapons();
+
+    //Insertion des personnages
+    this.grille.insertPlayers();
 
     //Insertion des stats de personnages
     $("#stats").append('<span>J1</span> : ' + "Arme : "+ perso1.weapon.name + "</br>" + " Puissance : " + perso1.weapon.damage + "</br>" + " Santé : " + perso1.health +"</br>");
@@ -69,7 +68,7 @@ class Jeu {
 
         if (e.which == 39) {//Droite
           $("#" + parseInt(this.grille.personnages[0].pos)).removeAttr("style");
-          let newPosition = parseInt(this.grille.personnages[0].pos) + 1; // this.grille.personnages[0].pos
+          let newPosition = parseInt(this.grille.personnages[0].pos) + 1;
           let direction = "à droite.";
           this.grille.move(newPosition, this.grille.personnages[0], direction, perso1, perso2);
           //modifier attribut style
@@ -175,7 +174,6 @@ class Jeu {
 
     }
     
-    
   }
 
   //Si les joueurs se rencontrent un combat se lance
@@ -190,7 +188,6 @@ class Jeu {
       }
       
       //ouverture du modal qui ne se fermera pas au clic
-
       if (this.fightTour < 2){
         $('#myModal').modal({backdrop: 'static', keyboard: false});
         $('#myModal').modal('show');

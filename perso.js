@@ -6,7 +6,6 @@ class Perso {
     this.position = Math.floor(Math.random() * 99);
     this.name = name;
     this.health = 150;
-    this.weapon = this.weapon0;
     this.visual = visual;
     this.weapon = weapon;
     this.weapon.position = this.position;
@@ -44,7 +43,6 @@ class Perso {
     // Pour que les personnages n'apparaissent pas à coté
     while (perso2.position === this.position || perso2.position === this.position -1 || perso2.position === this.position +1 || perso2.position === this.position -10 || perso2.position ===this.position +10 || perso2.position === this.position +9 || perso2.position === this.position -9 || perso2.position === this.position +11 || perso2.position === this.position -11) {
       perso2.position = Math.floor(Math.random() * 99);
-      // playerPosition(perso2);
       
     }
 
